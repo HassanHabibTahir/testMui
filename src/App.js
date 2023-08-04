@@ -9,8 +9,7 @@ import { Box, Container } from '@material-ui/core';
 
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -171,10 +170,15 @@ export default function App() {
 
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-              maximus est, id dignissim quam.
-            </Typography>
+            <Box>
+              <Typography>Clocked out</Typography>
+              <Typography style={{
+
+              }}>Not available</Typography>
+              <Box>
+                {/* starting from it */}
+              </Box>
+            </Box>
           </AccordionDetails>
         </Accordion>
 
