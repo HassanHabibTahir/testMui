@@ -64,16 +64,21 @@ const useStyles = makeStyles((theme) => ({
   footerText: {
     color: 'red',
     fontSize: theme.typography.pxToRem(12),
-  }
-  // AccordionSummary: {
-  //   '&.MuiAccordionSummary-expandIcon': {
-  //     position: "absolute",
-  //     right: "0rem",
-  //     top: "0rem",
+  },
+  trade: {
+    fontSize: theme.typography.pxToRem(16),
+    color: 'black',
+    fontWeight: "bold"
+  },
+  Mep: {
+    fontSize: theme.typography.pxToRem(15),
+  },
+  sameItems: {
+    fontSize: theme.typography.pxToRem(16),
+    color: 'black',
+    fontWeight: "bold"
+  },
 
-  //   }
-  // }
-  // 
 }));
 
 
@@ -98,10 +103,17 @@ const StyledINTERIORBadge = withStyles((theme) => ({
 export default function App() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
+  const [toggle, setToggle] = React.useState(true);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+  const togleHandler = () => {
+    // alert('Please select')
+    setToggle(!toggle);
+  }
+  console.log(toggle, "toggle--->");
+
 
   return (
     <Container maxWidth="sm">
@@ -111,13 +123,16 @@ export default function App() {
         >
           <AccordionSummary
             classes={{ expandIcon: classes.customExpandIcon }}
-
+            onClick={togleHandler}
+            style={{
+              transition: "1s"
+            }}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
           >
 
-            <Box
+            {toggle && <Box
               style={{
                 width: "100%"
               }}
@@ -166,15 +181,45 @@ export default function App() {
 
 
 
-            </Box>
+            </Box>}
 
           </AccordionSummary>
-          <AccordionDetails>
-            <Box>
-              <Typography>Clocked out</Typography>
-              <Typography style={{
+          <AccordionDetails
+            style={{
+              transition: "1s"
+            }}
+          >
+            <Box
+              style={{
+                width: '100%',
+              }}
+            >
+              <Box>
+                <Typography className={classes.trade}>
+                  Trade
+                </Typography>
+                <Typography className={classes.Mep}>MEP/General Interior</Typography>
+                <Box>
+                  <Box style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}>
+                    <Box>
+                      <Typography className={classes.sameItems}>QTY</Typography>
+                      <Typography>1</Typography>
+                    </Box>
+                    <Box>
+                      <Typography className={classes.sameItems}>ITEM</Typography>
+                      <Typography>20243</Typography>
+                    </Box>
 
-              }}>Not available</Typography>
+                  </Box>
+                  <Box>
+                    <Typography className={classes.sameItems} >PRODUCT NAME</Typography>
+                    <Typography>Install New Master Lock 3-1/14 in. Set-your-won combination Wall Lock Box, attach on grade door  frame or around  corner from  driveway(or as otherwise directed). Code set to Front door,car port door , utility room deadbolt. exterior storage room keyed knob. Mounted lock box code 1850. </Typography>
+                  </Box>
+                </Box>
+              </Box>
               <Box>
                 {/* starting from it */}
               </Box>
