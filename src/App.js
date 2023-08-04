@@ -184,11 +184,7 @@ export default function App() {
             </Box>}
 
           </AccordionSummary>
-          <AccordionDetails
-            style={{
-              transition: "1s"
-            }}
-          >
+          <AccordionDetails>
             <Box
               style={{
                 width: '100%',
