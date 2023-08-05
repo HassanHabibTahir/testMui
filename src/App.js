@@ -17,24 +17,27 @@ import {
 import Badge from "@material-ui/core/Badge";
 import { withStyles } from "@material-ui/core/styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import { itemsArray } from "./config";
+import CustomizedProgressBars from "./progressbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
   },
   heading: {
-    fontSize: theme.typography.pxToRem(16),
+    fontSize: theme.typography.pxToRem(9.29),
+    fontWeight: "700",
     alignItems: "center",
     display: "flex",
     color: "black",
-    fontWeight: "bolder",
     marginLeft: ".5rem",
   },
   quantity: {
-    fontSize: theme.typography.pxToRem(12),
-    fontWeight: 900,
-    color: "black",
-    paddingTop: ".2rem",
+    fontSize: theme.typography.pxToRem(11),
+    // fontWeight: 900,
+    // color: "black",
+    // paddingTop: ".2rem",
+    color: "red"
   },
   customAccordion: {
     position: "relative",
@@ -52,19 +55,26 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   subHeading: {
-    fontWeight: 700,
-    fontSize: theme.typography.pxToRem(15),
+    fontWeight: 400,
+    fontSize: theme.typography.pxToRem(13),
+    color: "black",
+  },
+  AddNote: {
+    fontWeight: 400,
+    fontSize: theme.typography.pxToRem(11),
+
     color: "black",
   },
   paragraph: {
     fontWeight: 300,
+    width: "90%",
     fontSize: theme.typography.pxToRem(13),
     color: "black",
   },
   footerBadge: {
     display: "flex",
     justifyContent: "space-between",
-    width: "98%",
+    width: "100%",
     alignItems: "center",
   },
   footerText: {
@@ -72,31 +82,58 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(12),
   },
   trade: {
-    fontSize: theme.typography.pxToRem(16),
+    fontSize: theme.typography.pxToRem(9.29),
+    fontWeight: 700,
     color: 'black',
-    fontWeight: "bold"
+
   },
   Mep: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(1),
   },
   sameItems: {
-    fontSize: theme.typography.pxToRem(16),
+    fontSize: theme.typography.pxToRem(11),
     color: 'black',
-    fontWeight: "bold"
+    fontWeight: 700
   },
+  sameItemsValue: {
+    fontSize: theme.typography.pxToRem(10),
+    color: 'black',
+    fontWeight: 600
+  },
+  ItemHeading: {
+    fontSize: theme.typography.pxToRem(9.29),
+    fontWeight: "700",
+    alignItems: "center",
+    display: "flex",
+    color: "black",
+    paddingTop: '.2rem'
+  },
+  selectComponent: {
 
-  // AccordionSummary: {
-  //   '&.MuiAccordionSummary-expandIcon': {
-  //     position: "absolute",
-  //     right: "0rem",
-  //     top: "0rem",
+    fontWeight: 600,
+    color: "#4CB6D9",
+    fontSize: theme.typography.pxToRem(11),
 
-  //   }
-  // }
-  //
+  },
+  addButton: {
+    fontWeight: 700,
+    height: theme.typography.pxToRem(13),
+    fontSize: theme.typography.pxToRem(11),
+    color: "black",
+    margin: "0px",
+    padding: "0px",
+  },
   Muiselect: {
     outline: "none",
   },
+  progressBar: {
+    height: "75%",
+    width: 12,
+    borderRadius: 50,
+    flexDirection: "column-reverse",
+    backgroundColor: "rgba(255, 255, 255)"
+  }
+
 }));
 
 const StyledBadge = withStyles((theme) => ({
@@ -120,7 +157,7 @@ export default function App() {
   const [expanded, setExpanded] = React.useState(false);
   const [toggle, setToggle] = React.useState(true);
   const [status, setStatus] = React.useState("");
-
+  const [index, setIndex] = React.useState()
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
   };
@@ -131,239 +168,247 @@ export default function App() {
     // Handle button click here
   };
 
-  const togleHandler = () => {
-    // alert('Please select')
+  const togleHandler = (index, toggle) => {
+    // alert('Please select')(
+    if (toggle) {
+      setIndex(index)
+
+    } else {
+      setIndex(-1)
+    }
     setToggle(!toggle);
   }
-  console.log(toggle, "toggle--->");
 
+  console.log(index, "index")
 
   return (
     <Container maxWidth="sm">
-      <div className={classes.root}>
-        <Accordion
-          expanded={expanded === "panel1"}
-          onChange={handleChange("panel1")}
-          className={classes.customAccordion}
-        >
-          <AccordionSummary
-            classes={{ expandIcon: classes.customExpandIcon }}
-            onClick={togleHandler}
-            style={{
-              transition: "1s"
-            }}
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
+      {itemsArray.map(({ product_name, amount, id, product_description, quantity, status, trade }, _index) =>
+        <div key={_index} className={classes.root}>
+          <Accordion
+            expanded={expanded === `panel${_index + 1}`}
+            onChange={handleChange(`panel${_index + 1}`)}
+            className={classes.customAccordion}
           >
-
-            {toggle && <Box
+            <AccordionSummary
+              classes={{ expandIcon: classes.customExpandIcon }}
+              onClick={() => togleHandler(_index, toggle)}
               style={{
-                width: "100%",
+                transition: "1s"
               }}
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
             >
-              <Box className={classes.parentHeading}>
-                <Box
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    textAlign: "center",
-                  }}
-                >
-                  <StyledINTERIORBadge color="secondary" variant="dot" />
-                  <Typography className={classes.heading}>
-                    MEP/GENERAL INTERIOR
-                  </Typography>
-                </Box>
 
-                <Typography className={classes.quantity}>QTY 1</Typography>
-              </Box>
-
-              <Typography className={classes.subHeading}>
-                Install New Master Lock 3-1/14 in. Set-your-own...
-              </Typography>
-              <Typography className={classes.paragraph}>
-                Front Door, carport door, utility room deadbolt,exterior storage
-                room keyed knob. Mounted Lock
-              </Typography>
-
-              <Box className={classes.footerBadge}>
-                <Typography className={classes.footerText}>
-                  0% COMPLETE-ACTON REQUIRED
-                </Typography>
-                <StyledBadge color="secondary" variant="dot" />
-              </Box>
-
-
-
-
-
-            </Box>}
-
-          </AccordionSummary>
-          <AccordionDetails>
-            <Box
-              style={{
-                width: '100%',
-              }}
-            >
-              <Box>
-                <Typography className={classes.trade}>
-                  Trade
-                </Typography>
-                <Typography className={classes.Mep}>MEP/General Interior</Typography>
-                <Box>
-                  <Box style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                  }}>
-                    <Box>
-                      <Typography className={classes.sameItems}>QTY</Typography>
-                      <Typography>1</Typography>
-                    </Box>
-                    <Box>
-                      <Typography className={classes.sameItems}>ITEM</Typography>
-                      <Typography>20243</Typography>
-                    </Box>
-
-                  </Box>
-                  <Box>
-                    <Typography className={classes.sameItems} >PRODUCT NAME</Typography>
-                    <Typography>Install New Master Lock 3-1/14 in. Set-your-won combination Wall Lock Box, attach on grade door  frame or around  corner from  driveway(or as otherwise directed). Code set to Front door,car port door , utility room deadbolt. exterior storage room keyed knob. Mounted lock box code 1850. </Typography>
-                  </Box>
-                </Box>
-              </Box>
-
-
-              <Typography>Clocked out</Typography>
-              <Typography style={{}}>Not available</Typography>
-              <Box>
-                {/* starting from it */}
-                <Typography className={classes.heading}>
-                  ITEM COMPLETION STATUS
-                </Typography>
-
-                {/* <Select
-                    style={{
-                      margin: "8px 6px",
-                      width: "100%",
-                      height: 50,
-                      fontWeight: 600,
-                      color: "#4CB6D9",
-                      backgroundColor: "#F7F7F7",
-                      borderRadius: "5px",
-                      paddingLeft: "5px",
-                      boxShadow: "none",
-                      "&.MuiOutlinedInput-notchedOutline": {
-                        border: " none !important",
-                      },
-                      "&.MuiOutlinedInput-notchedOutline": {
-                        border: "none  !important",
-                        outline: "none  !important",
-                      },
-                      "&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
-                        {
-                          border: "none  !important",
-                          outline: "none  !important",
-                        },
-                      "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                        {
-                          border: "none  !important",
-                          outline: "none  !important",
-                        },
-                    }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    value={status}
-                    classes={{ Muiselect: classes.MuiSelect }}
-                    onChange={handleStatusChange}
-                    displayEmpty
-                    renderValue={(value) => (value === "" ? "Select" : value)}
-                  >
-                    <MenuItem value="">Select</MenuItem>
-                    <MenuItem value={"active"}>Active</MenuItem>
-                    <MenuItem value={"inactive"}>Inactive</MenuItem>
-                  </Select> */}
-                <Box
-                  style={{
-                    width: "100%",
-                    height: 50,
-                    borderRadius: "5px",
-                    color: "#4CB6D9",
-                    backgroundColor: "#F7F7F7",
-                    padding: "12px",
-                  }}
-                >
-                  <Typography
-                    style={{
-                      fontWeight: 600,
-                      color: "#4CB6D9",
-                      fontSize: "18px",
-                    }}
-                  >
-                    Select
-                  </Typography>
-                </Box>
-                <Box
-                  style={{
-                    margin: "8px 6px",
-                  }}
-                >
-                  <Typography className={classes.heading}>
-                    ADDITIONAL COMMENTS
-                  </Typography>
+              {index !== _index && <Box
+                style={{
+                  width: "100%",
+                }}
+              >
+                <Box className={classes.parentHeading}>
                   <Box
                     style={{
                       display: "flex",
+                      justifyContent: "center",
                       alignItems: "center",
-                      gap: "15px",
+                      textAlign: "center",
                     }}
                   >
-                    <AddCircleIcon
-                      onClick={handleButtonClick}
-                      style={{
-                        color: "#4CB6D9",
-                        cursor: "pointer",
-                      }}
-                    />
-                    <Typography className={classes.subHeading}>
-                      Add Note
+                    <StyledINTERIORBadge color="secondary" variant="dot" />
+                    <Typography className={classes.heading}>
+                      {product_name}
                     </Typography>
                   </Box>
+
+                  <Typography className={classes.quantity}>QTY 1</Typography>
                 </Box>
-                <Typography className={classes.heading}>PHOTOS</Typography>
-                <Box
-                  style={{
-                    width: "100%",
-                    height: 50,
-                    borderRadius: "5px",
-                    color: "#4CB6D9",
-                    backgroundColor: "#F7F7F7",
-                    padding: "5px 10px",
-                  }}
-                >
-                  <Typography
-                    style={{ paddingLeft: "15px" }}
-                    className={classes.paragraph}
-                  >
-                    Photo 1
+
+                <Typography className={classes.subHeading}>
+                  Install New Master Lock 3-1/14 in. Set-your-own...
+                </Typography>
+                <Typography className={classes.paragraph}>
+                  Front Door, carport door, utility room deadbolt,exterior storage
+                  room keyed knob. Mounted Lock
+                </Typography>
+
+                <Box className={classes.footerBadge}>
+                  <Typography className={classes.footerText}>
+                    0% COMPLETE-ACTON REQUIRED
                   </Typography>
-                  <Button
+                  <Box
+                    className={classes.progressBar}
+                  >
+
+                  </Box>
+                  <CustomizedProgressBars progress={status.progress} />
+                  {/* <StyledBadge color="secondary" variant="dot" /> */}
+                </Box>
+
+
+
+
+
+              </Box>}
+
+            </AccordionSummary>
+            <AccordionDetails>
+              <Box
+                style={{
+                  width: '100%',
+                }}
+              >
+                <Box>
+                  <Typography className={classes.trade}>
+                    {trade}
+                  </Typography>
+                  <Typography className={classes.Mep}>MEP/General Interior</Typography>
+                  <Box>
+                    <Box style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                    }}>
+                      <Box>
+                        <Typography className={classes.sameItems}>QTY</Typography>
+                        <Typography className={classes.sameItemsValue}>1</Typography>
+                      </Box>
+                      <Box>
+                        <Typography className={classes.sameItems}>ITEM</Typography>
+                        <Typography className={classes.sameItemsValue}>{id}</Typography>
+                      </Box>
+
+                    </Box>
+                    <Box>
+                      <Typography className={classes.sameItems} >PRODUCT NAME</Typography>
+                      <Typography className={classes.paragraph}>Install New Master Lock 3-1/14 in. Set-your-won combination Wall Lock Box, attach on grade door  frame or around  corner from  driveway(or as otherwise directed). Code set to Front door,car port door , utility room deadbolt. exterior storage room keyed knob. Mounted lock box code 1850. </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+
+
+                <Typography className={classes.sameItems}>Clocked out</Typography>
+                <Typography className={classes.sameItemsValue}>Not available</Typography>
+                <Box>
+
+                  <Typography className={classes.ItemHeading}>
+                    ITEM COMPLETION STATUS
+                  </Typography>
+
+
+                  <Box
                     style={{
-                      fontWeight: 600,
+                      width: "100%",
+                      height: 40,
+                      borderRadius: "5px",
                       color: "#4CB6D9",
-                      margin: "0px",
-                      padding: "0px",
+                      backgroundColor: "#F7F7F7",
+                      padding: "12px",
                     }}
                   >
-                    Add
-                  </Button>
+                    <Typography
+                      className={classes.selectComponent}
+                    >
+                      Select
+                    </Typography>
+                  </Box>
+                  <Box
+                    style={{
+                      margin: "8px 6px",
+                    }}
+                  >
+                    <Typography className={classes.heading}>
+                      ADDITIONAL COMMENTS
+                    </Typography>
+                    <Box
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "15px",
+                      }}
+                    >
+                      <AddCircleIcon
+                        onClick={handleButtonClick}
+                        style={{
+                          color: "#4CB6D9",
+                          cursor: "pointer",
+                        }}
+                      />
+                      <Typography className={classes.AddNote}>
+                        Add Note
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Typography className={classes.heading}>PHOTOS</Typography>
+                  <Box
+                    style={{
+                      width: "100%",
+                      height: 50,
+                      borderRadius: "5px",
+                      color: "#4CB6D9",
+                      backgroundColor: "#F7F7F7",
+                      padding: "5px 10px",
+                    }}
+                  >
+                    <Typography
+                      style={{ paddingLeft: "15px" }}
+                      className={classes.paragraph}
+                    >
+                      Photo 1
+                    </Typography>
+                    <Button
+                      className={classes.addButton}
+                    >
+                      Add
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          </AccordionDetails>
-        </Accordion>
-      </div>
-    </Container>
+            </AccordionDetails>
+          </Accordion>
+        </div>)
+      }
+
+
+    </Container >
   );
 }
+// {/* <Select
+//                     style={{
+//                       margin: "8px 6px",
+//                       width: "100%",
+//                       height: 50,
+//                       fontWeight: 600,
+//                       color: "#4CB6D9",
+//                       backgroundColor: "#F7F7F7",
+//                       borderRadius: "5px",
+//                       paddingLeft: "5px",
+//                       boxShadow: "none",
+//                       "&.MuiOutlinedInput-notchedOutline": {
+//                         border: " none !important",
+//                       },
+//                       "&.MuiOutlinedInput-notchedOutline": {
+//                         border: "none  !important",
+//                         outline: "none  !important",
+//                       },
+//                       "&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
+//                         {
+//                           border: "none  !important",
+//                           outline: "none  !important",
+//                         },
+//                       "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+//                         {
+//                           border: "none  !important",
+//                           outline: "none  !important",
+//                         },
+//                     }}
+//                     inputProps={{ "aria-label": "Without label" }}
+//                     value={status}
+//                     classes={{ Muiselect: classes.MuiSelect }}
+//                     onChange={handleStatusChange}
+//                     displayEmpty
+//                     renderValue={(value) => (value === "" ? "Select" : value)}
+//                   >
+//                     <MenuItem value="">Select</MenuItem>
+//                     <MenuItem value={"active"}>Active</MenuItem>
+//                     <MenuItem value={"inactive"}>Inactive</MenuItem>
+//                   </Select> */}
