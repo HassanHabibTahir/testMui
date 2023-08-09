@@ -1,211 +1,201 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandLess";
-import {
-  Box,
-  Button,
-  Container,
-  IconButton,
-  MenuItem,
-  Select,
-} from "@material-ui/core";
+import React from 'react'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import Typography from '@material-ui/core/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandLess'
+import { Box, Button, Container, MenuItem, Select } from '@material-ui/core'
 
-import Badge from "@material-ui/core/Badge";
-import { withStyles } from "@material-ui/core/styles";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { itemsArray } from "./config";
-import CustomizedProgressBars from "./progressbar";
+import Badge from '@material-ui/core/Badge'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
+import { itemsArray } from './DummyData'
+import CustomizedProgressBars from './ProgressBar'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%",
+    width: '100%'
   },
   heading: {
-    fontSize: theme.typography.pxToRem(9.29),
-    fontWeight: "700",
-    alignItems: "center",
-    display: "flex",
-    color: "black",
-    marginLeft: ".5rem",
+    fontSize: '9.6px',
+    fontWeight: '700',
+    alignItems: 'center',
+    display: 'flex',
+    color: 'black',
+    marginLeft: '.5rem'
   },
   quantity: {
-    fontSize: theme.typography.pxToRem(11),
+    fontSize: '9.6px',
     // fontWeight: 900,
     // color: "black",
     // paddingTop: ".2rem",
-    color: "red",
+    color: 'red'
   },
   customAccordion: {
-    position: "relative",
+    position: 'relative'
   },
   customExpandIcon: {
-    position: "absolute",
-    right: 15,
-    top: 0,
-    color: "black",
+    position: 'absolute',
+    right: 4,
+    top: -2,
+    color: 'black'
   },
   parentHeading: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "95%",
-    color: "black",
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '95%',
+    color: 'black'
   },
   subHeading: {
     fontWeight: 400,
-    fontSize: theme.typography.pxToRem(13),
-    color: "black",
+    fontSize: '13px',
+    color: 'black'
   },
   AddNote: {
     fontWeight: 400,
     fontSize: theme.typography.pxToRem(11),
-
-    color: "black",
+    color: 'black'
   },
   paragraph: {
     fontWeight: 300,
-
-    width: "90%",
-    fontSize: theme.typography.pxToRem(13),
-    color: "black",
+    fontSize: '13.44px',
+    width: '90%',
+    color: 'black'
   },
   footerBadge: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100%",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    alignItems: 'center'
   },
   footerText: {
-    color: "red",
-    fontSize: theme.typography.pxToRem(12),
+    color: 'red',
+    fontSize: '9.6px'
   },
   trade: {
     fontSize: theme.typography.pxToRem(9.29),
     fontWeight: 700,
-    color: "black",
+    color: 'black'
   },
   Mep: {
-    fontSize: theme.typography.pxToRem(1),
+    fontSize: theme.typography.pxToRem(1)
   },
   sameItems: {
     fontSize: theme.typography.pxToRem(11),
-    color: "black",
-    fontWeight: 700,
+    color: 'black',
+    fontWeight: 700
   },
   sameItemsValue: {
     fontSize: theme.typography.pxToRem(10),
-    color: "black",
-    fontWeight: 600,
+    color: 'black',
+    fontWeight: 600
   },
   ItemHeading: {
     fontSize: theme.typography.pxToRem(9.29),
-    fontWeight: "700",
-    alignItems: "center",
-    display: "flex",
-    color: "black",
-    paddingTop: ".2rem",
+    fontWeight: '700',
+    alignItems: 'center',
+    display: 'flex',
+    color: 'black',
+    paddingTop: '.2rem'
   },
   selectComponent: {
     fontWeight: 600,
-    color: "#4CB6D9",
-    fontSize: theme.typography.pxToRem(11),
+    color: '#4CB6D9',
+    fontSize: theme.typography.pxToRem(11)
   },
   addButton: {
     fontWeight: 700,
     height: theme.typography.pxToRem(13),
     fontSize: theme.typography.pxToRem(13),
-    color: "#4CB6D9",
-    background: "#EDEDED",
-    padding: "12px 5px",
-    marginLeft: "5px",
-    marginBottom: "5px",
+    color: '#4CB6D9',
+    background: '#EDEDED',
+    padding: '12px 5px',
+    marginLeft: '5px',
+    marginBottom: '5px'
   },
   Muiselect: {
-    outline: "none",
+    outline: 'none'
   },
   progressBar: {
-    height: "75%",
+    height: '75%',
     width: 12,
     borderRadius: 50,
-    flexDirection: "column-reverse",
-    backgroundColor: "rgba(255, 255, 255)",
+    flexDirection: 'column-reverse',
+    backgroundColor: 'rgba(255, 255, 255)'
   },
   selectBox: {
-    width: "100%",
+    width: '100%',
     height: 50,
     fontWeight: 600,
-    color: "#4CB6D9",
-    backgroundColor: "#F7F7F7",
-    borderRadius: "5px",
-    paddingLeft: "15px",
-    boxShadow: "none",
-    fontSize: theme.typography.pxToRem(12),
+    color: '#4CB6D9',
+    backgroundColor: '#F7F7F7',
+    borderRadius: '5px',
+    paddingLeft: '15px',
+    boxShadow: 'none',
+    fontSize: theme.typography.pxToRem(12)
   },
   menuItem: {
-    fontSize: theme.typography.pxToRem(12),
-  },
-}));
+    fontSize: theme.typography.pxToRem(12)
+  }
+}))
 
-const StyledBadge = withStyles((theme) => ({
-  badge: {
-    fontSize: "1rem", // Increase this value to adjust the size
-    minWidth: ".6rem", // Adjust this value to set the minimum width
-    height: ".6rem", // Adjust this value to set the height
-    // padding: '0.5rem'
-  },
-}))(Badge);
-const StyledINTERIORBadge = withStyles((theme) => ({
+// const StyledBadge = withStyles(theme => ({
+//   badge: {
+//     fontSize: '1rem', // Increase this value to adjust the size
+//     minWidth: '.6rem', // Adjust this value to set the minimum width
+//     height: '.6rem' // Adjust this value to set the height
+//     // padding: '0.5rem'
+//   }
+// }))(Badge)
+const StyledINTERIORBadge = withStyles(theme => ({
   badge: {
     // marginTop: ".1rem",
-    minWidth: ".9rem",
-    height: ".9rem",
-    backgroundColor: "#4CB6D9",
-  },
-}))(Badge);
+    minWidth: '.9rem',
+    height: '.9rem',
+    backgroundColor: '#4CB6D9'
+  }
+}))(Badge)
 
 export default function App() {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-  const [toggle, setToggle] = React.useState(true);
-  const [selectStatus, setSelectStatus] = React.useState("");
-  const [index, setIndex] = React.useState();
-  const handleStatusChange = (event) => {
-    setSelectStatus(event.target.value);
-  };
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+  const classes = useStyles()
+  const [expanded, setExpanded] = React.useState(false)
+  const [toggle, setToggle] = React.useState(true)
+  const [selectStatus, setSelectStatus] = React.useState('')
+  const [index, setIndex] = React.useState()
+  const handleStatusChange = event => {
+    setSelectStatus(event.target.value)
+  }
+  const handleChange = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false)
+  }
   const handleButtonClick = () => {
     // Handle button click here
-  };
+  }
 
   const togleHandler = (index, toggle) => {
     // alert('Please select')(
     if (toggle) {
-      setIndex(index);
+      setIndex(index)
     } else {
-      setIndex(-1);
+      setIndex(-1)
     }
-    setToggle(!toggle);
-  };
+    setToggle(!toggle)
+  }
 
-  console.log(index, "index");
+  console.log(index, 'index')
 
   return (
     <Container maxWidth="sm">
       {itemsArray.map(
         (
           {
-            product_name,
+            productName,
             amount,
             id,
-            product_description,
+            productDescription,
             quantity,
             status,
-            trade,
+            trade
           },
           _index
         ) => (
@@ -219,7 +209,7 @@ export default function App() {
                 classes={{ expandIcon: classes.customExpandIcon }}
                 onClick={() => togleHandler(_index, toggle)}
                 style={{
-                  transition: "1s",
+                  transition: '1s'
                 }}
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1bh-content"
@@ -228,21 +218,21 @@ export default function App() {
                 {index !== _index && (
                   <Box
                     style={{
-                      width: "100%",
+                      width: '100%'
                     }}
                   >
                     <Box className={classes.parentHeading}>
                       <Box
                         style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          textAlign: "center",
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          textAlign: 'center'
                         }}
                       >
                         <StyledINTERIORBadge color="secondary" variant="dot" />
                         <Typography className={classes.heading}>
-                          {product_name}
+                          {productName}
                         </Typography>
                       </Box>
 
@@ -273,7 +263,7 @@ export default function App() {
               <AccordionDetails>
                 <Box
                   style={{
-                    width: "100%",
+                    width: '100%'
                   }}
                 >
                   <Box>
@@ -284,8 +274,8 @@ export default function App() {
                     <Box>
                       <Box
                         style={{
-                          display: "flex",
-                          justifyContent: "space-between",
+                          display: 'flex',
+                          justifyContent: 'space-between'
                         }}
                       >
                         <Box>
@@ -315,7 +305,7 @@ export default function App() {
                           or around corner from driveway(or as otherwise
                           directed). Code set to Front door,car port door ,
                           utility room deadbolt. exterior storage room keyed
-                          knob. Mounted lock box code 1850.{" "}
+                          knob. Mounted lock box code 1850.{' '}
                         </Typography>
                       </Box>
                     </Box>
@@ -334,19 +324,19 @@ export default function App() {
 
                     <Select
                       className={classes.selectBox}
-                      inputProps={{ "aria-label": "Without label" }}
+                      inputProps={{ 'aria-label': 'Without label' }}
                       value={selectStatus}
                       onChange={handleStatusChange}
                       displayEmpty
-                      renderValue={(value) => (value === "" ? "Select" : value)}
+                      renderValue={value => (value === '' ? 'Select' : value)}
                     >
                       <MenuItem className={classes.menuItem} value="">
                         Select
                       </MenuItem>
-                      <MenuItem className={classes.menuItem} value={"active"}>
+                      <MenuItem className={classes.menuItem} value={'active'}>
                         Active
                       </MenuItem>
-                      <MenuItem className={classes.menuItem} value={"inactive"}>
+                      <MenuItem className={classes.menuItem} value={'inactive'}>
                         Inactive
                       </MenuItem>
                     </Select>
@@ -367,29 +357,29 @@ export default function App() {
                     </Box> */}
                     <Box
                       style={{
-                        margin: "8px 6px",
+                        margin: '8px 6px'
                       }}
                     >
                       <Typography
                         className={classes.heading}
                         style={{
-                          marginLeft: "0",
+                          marginLeft: '0'
                         }}
                       >
                         ADDITIONAL COMMENTS
                       </Typography>
                       <Box
                         style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "15px",
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '15px'
                         }}
                       >
                         <AddCircleIcon
                           onClick={handleButtonClick}
                           style={{
-                            color: "#4CB6D9",
-                            cursor: "pointer",
+                            color: '#4CB6D9',
+                            cursor: 'pointer'
                           }}
                         />
                         <Typography className={classes.AddNote}>
@@ -400,15 +390,15 @@ export default function App() {
                     <Typography className={classes.heading}>PHOTOS</Typography>
                     <Box
                       style={{
-                        width: "100%",
+                        width: '100%',
                         height: 50,
-                        borderRadius: "5px",
-                        backgroundColor: "#F7F7F7",
-                        padding: "3px 10px",
+                        borderRadius: '5px',
+                        backgroundColor: '#F7F7F7',
+                        padding: '3px 10px'
                       }}
                     >
                       <Typography
-                        style={{ paddingLeft: "8px" }}
+                        style={{ paddingLeft: '8px' }}
                         className={classes.paragraph}
                       >
                         Photo 1
@@ -423,48 +413,5 @@ export default function App() {
         )
       )}
     </Container>
-  );
+  )
 }
-<<<<<<< HEAD
-=======
-// {/* <Select
-//                     style={{
-//                       margin: "8px 6px",
-//                       width: "100%",
-//                       height: 50,
-//                       fontWeight: 600,
-//                       color: "#4CB6D9",
-//                       backgroundColor: "#F7F7F7",
-//                       borderRadius: "5px",
-//                       paddingLeft: "5px",
-//                       boxShadow: "none",
-//                       "&.MuiOutlinedInput-notchedOutline": {
-//                         border: " none !important",
-//                       },
-//                       "&.MuiOutlinedInput-notchedOutline": {
-//                         border: "none  !important",
-//                         outline: "none  !important",
-//                       },
-//                       "&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
-//                         {
-//                           border: "none  !important",
-//                           outline: "none  !important",
-//                         },
-//                       "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-//                         {
-//                           border: "none  !important",
-//                           outline: "none  !important",
-//                         },
-//                     }}
-//                     inputProps={{ "aria-label": "Without label" }}
-//                     value={status}
-//                     classes={{ Muiselect: classes.MuiSelect }}
-//                     onChange={handleStatusChange}
-//                     displayEmpty
-//                     renderValue={(value) => (value === "" ? "Select" : value)}
-//                   >
-//                     <MenuItem value="">Select</MenuItem>
-//                     <MenuItem value={"active"}>Active</MenuItem>
-//                     <MenuItem value={"inactive"}>Inactive</MenuItem>
-//                   </Select> */}
->>>>>>> 76db6086d9927ff89e7b67c9041dbcf1b742e4cb

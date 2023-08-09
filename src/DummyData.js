@@ -1,10 +1,10 @@
 export const itemsArray = [
     {
-        "product_name": "Whole House Clean",
+        "productName": "Whole House Clean",
         "amount": 225,
         "id": "a1N78000000hiByEAI",
         "item": "Clean - Whole House Interior - includes appliance wipe down",
-        "product_description": null,
+        "product_description": "Clean - Whole House Interior - includes appliance wipe down Clean - Whole House Interior - includes appliance wipe down",
         "quantity": 1,
         "rate": 250,
         "status": { "progress": "0" },
@@ -14,11 +14,11 @@ export const itemsArray = [
         "trade": "Land"
     },
     {
-        "product_name": "Kitchen Clean",
+        "productName": "Kitchen Clean",
         "amount": 150,
         "id": "a1N78000000hiByEAB",
         "item": "Clean - Kitchen - includes countertop and sink",
-        "product_description": null,
+        "product_description": "Clean - Whole House Interior - includes appliance wipe down Clean - Whole House Interior - includes appliance wipe down",
         "quantity": 1,
         "rate": 150,
         "status": { "progress": "50" },
@@ -28,7 +28,7 @@ export const itemsArray = [
         "trade": "Land"
     },
     {
-        "product_name": "Bathroom Clean",
+        "productName": "Bathroom Clean",
         "amount": 100,
         "id": "a1N78000000hiByEAC",
         "item": "Clean - Bathroom - includes toilet and shower",
@@ -42,7 +42,7 @@ export const itemsArray = [
         "trade": "Land"
     },
     {
-        "product_name": "Living Room Clean",
+        "productName": "Living Room Clean",
         "amount": 180,
         "id": "a1N78000000hiByEAD",
         "item": "Clean - Living Room - includes dusting and vacuuming",
@@ -56,7 +56,7 @@ export const itemsArray = [
         "trade": "Land"
     },
     {
-        "product_name": "Bedroom Clean",
+        "productName": "Bedroom Clean",
         "amount": 120,
         "id": "a1N78000000hiByEAE",
         "item": "Clean - Bedroom - includes changing bed linens",
