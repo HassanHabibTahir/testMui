@@ -39,9 +39,9 @@ export default function CustomizedProgressBars({ progress }) {
         <BorderLinearProgress
           style={{
             transform: "rotate(-90deg)",
-            width: "5rem",
+            width: "4rem",
             // position: "absolute",
-            left: "1.7rem",
+            left: "1.3rem",
             bottom: "1.5rem",
             // right: "2rem",
             // width: 200,
