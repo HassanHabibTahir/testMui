@@ -102,3 +102,7 @@ p {
   border-bottom: none !important;
   outline: none;
 }
+.MuiAccordionSummary-root {
+  align-items: flex-start !important;
+}
+
