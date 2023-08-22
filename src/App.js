@@ -119,8 +119,8 @@ const useStyles = makeStyles((theme) => ({
     outline: "none",
   },
   progressBar: {
-    height: "75%",
-    width: 12,
+    height: "100%",
+    width: 60,
     borderRadius: 50,
     flexDirection: "column-reverse",
     backgroundColor: "rgba(255, 255, 255)",
@@ -260,8 +260,10 @@ export default function App() {
                       <Typography className={classes.footerText}>
                         0% COMPLETE-ACTON REQUIRED
                       </Typography>
-                      <Box className={classes.progressBar}></Box>
-                      <CustomizedProgressBars progress={status.progress} />
+                      <Box className={classes.progressBar}>
+
+                        <CustomizedProgressBars progress={status.progress} />
+                      </Box>
                       {/* <StyledBadge color="secondary" variant="dot" /> */}
                     </Box>
                   </Box>

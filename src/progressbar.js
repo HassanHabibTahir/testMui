@@ -39,9 +39,9 @@ export default function CustomizedProgressBars({ progress }) {
         <BorderLinearProgress
           style={{
             transform: "rotate(-90deg)",
-            width: "4rem",
+            width: 100,
             // position: "absolute",
-            left: "1.3rem",
+            left: "2.6rem",
             bottom: "1.5rem",
             // right: "2rem",
             // width: 200,
@@ -50,7 +50,7 @@ export default function CustomizedProgressBars({ progress }) {
             // left: -50
           }}
           variant="determinate"
-          value={+progress}
+          value={100}
         />
       </Box>
     </div>
