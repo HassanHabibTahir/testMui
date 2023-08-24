@@ -334,7 +334,7 @@ export default function App() {
                       </Typography>
                       <Box className={classes.progressBar}>
 
-                        <CustomizedProgressBars progress={status.progress} />
+                        <CustomizedProgressBars percentage={status.progress} />
                       </Box>
                     </Box>
                   </Box>
