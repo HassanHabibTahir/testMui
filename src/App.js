@@ -15,6 +15,7 @@ import CustomizedProgressBars from "./progressbar";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+
   },
   heading: {
     fontSize: theme.typography.pxToRem(10),
@@ -26,21 +27,43 @@ const useStyles = makeStyles((theme) => ({
   },
   quantity: {
     fontSize: "9.6px",
-    // fontWeight: 900,
-    // color: "black",
-    // paddingTop: ".2rem",
-
     color: "red",
   },
   customAccordion: {
+    margin: '10px 0',
+    '& .MuiAccordion-root': {
+      '&:not(:last-child)': {
+        marginBottom: 0,
+      },
+    },
+    customAccordionSummaryContent: {
+      '&.Mui-expanded': {
+        margin: 0,
+        backgroundColor: 'transparent',
+
+      },
+    },
+
     position: "relative",
+    marginBottom: '5px',
+    "&.Mui-expanded": {
+      minHeight: 40
+    },
+    "&.MuiAccordionSummary-root": {
+      minHeight: 10
+    },
+    "&.MuiAccordionSummary-content.Mui-expanded": {
+      margin: "0px 0"
+    }
   },
   customExpandIcon: {
-    // position: "absolute",
+    transition: 'none',
+    backgroundColor: 'transparent !important',
+    position: "absolute",
     padding: " 7px 8px 8px 0px",
-    // right: '15px',
-    // top: '-5px',
+    right: '2px',
     color: "black",
+    margin: 0,
   },
   parentHeading: {
     display: "flex",
@@ -139,19 +162,22 @@ const useStyles = makeStyles((theme) => ({
   menuItem: {
     fontSize: theme.typography.pxToRem(10),
   },
+
+
+  customAccordionSummaryRoot: {
+    alignItems: "flex-start !important",
+    '&.Mui-expanded': {
+      minHeight: '5px',
+      height: '0rem',
+    },
+
+  },
+
+
 }));
 
-// const StyledBadge = withStyles(theme => ({
-//   badge: {
-//     fontSize: '1rem', // Increase this value to adjust the size
-//     minWidth: '.6rem', // Adjust this value to set the minimum width
-//     height: '.6rem' // Adjust this value to set the height
-//     // padding: '0.5rem'
-//   }
-// }))(Badge)
 const StyledINTERIORBadge = withStyles((theme) => ({
   badge: {
-    // marginTop: ".1rem",
     minWidth: ".9rem !important",
     height: ".9rem !important",
     backgroundColor: "#4CB6D9 !important",
@@ -161,7 +187,7 @@ const StyledINTERIORBadge = withStyles((theme) => ({
 export default function App() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [toggle, setToggle] = React.useState(true);
+  const [toggle] = React.useState(true);
   const [selectStatus, setSelectStatus] = React.useState("");
   const [index, setIndex] = React.useState(-1);
   const handleStatusChange = (event) => {
@@ -175,13 +201,6 @@ export default function App() {
   };
 
   const togleHandler = (_index, toggle) => {
-    // alert('Please select')(
-    // if (toggle) {
-    //   setIndex(index);
-    // } else {
-    //   setIndex(-1);
-    // }
-    // setToggle(!toggle);
     if (index === _index) {
       setIndex(-1);
     } else {
@@ -213,7 +232,12 @@ export default function App() {
               className={classes.customAccordion}
             >
               <AccordionSummary
-                classes={{ expandIcon: classes.customExpandIcon }}
+                classes={{
+                  root: classes.customAccordionSummaryRoot,
+                  content: classes.customAccordionSummaryContent,
+                  expandIcon: classes.customExpandIcon,
+                }}
+
                 onClick={() => togleHandler(_index, toggle)}
                 style={{
                   transition: "1s",
@@ -247,7 +271,6 @@ export default function App() {
                         QTY 1
                       </Typography>
                     </Box>
-
                     <Typography className={classes.subHeading}>
                       Install New Master Lock 3-1/14 in. Set-your-own...
                     </Typography>
@@ -264,12 +287,14 @@ export default function App() {
 
                         <CustomizedProgressBars progress={status.progress} />
                       </Box>
-                      {/* <StyledBadge color="secondary" variant="dot" /> */}
                     </Box>
                   </Box>
                 )}
               </AccordionSummary>
-              <AccordionDetails>
+              <AccordionDetails
+
+
+              >
                 <Box
                   style={{
                     width: "100%",
@@ -351,19 +376,19 @@ export default function App() {
                     </Select>
 
                     {/* <Box
-                      style={{
-                        width: "100%",
-                        height: 40,
-                        borderRadius: "5px",
-                        color: "#4CB6D9",
-                        backgroundColor: "#F7F7F7",
-                        padding: "12px",
-                      }}
-                    >
-                      <Typography className={classes.selectComponent}>
-                        Select
-                      </Typography>
-                    </Box> */}
+                        style={{
+                          width: "100%",
+                          height: 40,
+                          borderRadius: "5px",
+                          color: "#4CB6D9",
+                          backgroundColor: "#F7F7F7",
+                          padding: "12px",
+                        }}
+                      >
+                        <Typography className={classes.selectComponent}>
+                          Select
+                        </Typography>
+                      </Box> */}
                     <Box
                       style={{
                         margin: "8px 6px",

@@ -41,7 +41,7 @@ export default function CustomizedProgressBars({ progress }) {
             transform: "rotate(-90deg)",
             width: 100,
             // position: "absolute",
-            left: "2.6rem",
+            left: "1.5rem",
             bottom: "1.5rem",
             // right: "2rem",
             // width: 200,
@@ -50,7 +50,7 @@ export default function CustomizedProgressBars({ progress }) {
             // left: -50
           }}
           variant="determinate"
-          value={100}
+          value={+progress}
         />
       </Box>
     </div>
