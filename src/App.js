@@ -17,6 +17,25 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
 
   },
+  additional: {
+    fontSize: theme.typography.pxToRem(10),
+    fontWeight: 700,
+    alignItems: "center",
+    display: "flex",
+    color: "black",
+    marginLeft: ".5rem",
+    marginTop: '.9rem'
+
+  },
+  photos: {
+    fontSize: theme.typography.pxToRem(10),
+    fontWeight: 700,
+    alignItems: "center",
+    display: "flex",
+    color: "black",
+    marginLeft: ".5rem",
+    marginTop: '.9rem'
+  },
   heading: {
     fontSize: theme.typography.pxToRem(10),
     fontWeight: 700,
@@ -24,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     color: "black",
     marginLeft: ".5rem",
+    // marginTop: '.7rem'  
   },
   quantity: {
     fontSize: "9.6px",
@@ -82,10 +102,17 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   paragraph: {
-    fontWeight: 400,
-    fontSize: "13.44px",
+    fontWeight: 600,
+    fontSize: theme.typography.pxToRem(12),
     width: "90%",
     color: "black",
+  },
+  bottomParagraph: {
+    fontWeight: 400,
+    fontSize: theme.typography.pxToRem(11),
+    width: "90%",
+
+
   },
   footerBadge: {
     display: "flex",
@@ -101,9 +128,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(9.29),
     fontWeight: 700,
     color: "black",
+    paddingBottom: '.2rem'
   },
   Mep: {
-    fontSize: theme.typography.pxToRem(1),
+    fontSize: theme.typography.pxToRem(11),
+  },
+  quantityItem: {
+    fontSize: theme.typography.pxToRem(11),
+    color: "black",
+    fontWeight: 700,
   },
   sameItems: {
     fontSize: theme.typography.pxToRem(11),
@@ -121,7 +154,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     display: "flex",
     color: "black",
-    paddingTop: ".2rem",
+    paddingTop: "1rem",
   },
   selectComponent: {
     fontWeight: 600,
@@ -149,6 +182,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgba(255, 255, 255)",
   },
   selectBox: {
+    // Remove the padding for the icon
+    paddingRight: '0',
+    // Hide the SVG icon
+    '& .MuiSvgIcon-root': {
+      display: 'none',
+    },
+    '&:before': {
+      display: 'none', // Hide the underline
+    },
+    '&:after': {
+      display: 'none', // Hide the underline
+    },
+    '& > .MuiSelect-root': {
+      paddingRight: '0', // Remove space for the icon
+    },
     width: "100%",
     height: 50,
     fontWeight: 700,
@@ -273,6 +321,7 @@ export default function App() {
                     </Box>
                     <Typography className={classes.subHeading}>
                       Install New Master Lock 3-1/14 in. Set-your-own...
+                      combinations
                     </Typography>
                     <Typography className={classes.paragraph}>
                       Front Door, carport door, utility room deadbolt,exterior
@@ -313,11 +362,11 @@ export default function App() {
                         }}
                       >
                         <Box>
-                          <Typography className={classes.sameItems}>
+                          <Typography className={classes.quantityItem}>
                             QTY
                           </Typography>
                           <Typography className={classes.sameItemsValue}>
-                            1
+                            {quantity}
                           </Typography>
                         </Box>
                         <Box>
@@ -337,20 +386,23 @@ export default function App() {
                           Install New Master Lock 3-1/14 in. Set-your-won
                           combination Wall Lock Box, attach on grade door frame
                           or around corner from driveway(or as otherwise
-                          directed). Code set to Front door,car port door ,
+                          directed). Code set to {" "}
+                        </Typography>
+                        <Typography className={classes.bottomParagraph}>
+                          Front door,car port door ,
                           utility room deadbolt. exterior storage room keyed
-                          knob. Mounted lock box code 1850.{" "}
+                          knob. Mounted lock box code 1850.
                         </Typography>
                       </Box>
                     </Box>
                   </Box>
 
-                  <Typography className={classes.sameItems}>
+                  {/* <Typography className={classes.sameItems}>
                     Clocked out
                   </Typography>
                   <Typography className={classes.sameItemsValue}>
                     Not available
-                  </Typography>
+                  </Typography> */}
                   <Box>
                     <Typography className={classes.ItemHeading}>
                       ITEM COMPLETION STATUS
@@ -395,7 +447,7 @@ export default function App() {
                       }}
                     >
                       <Typography
-                        className={classes.heading}
+                        className={classes.additional}
                         style={{
                           marginLeft: "0",
                         }}
@@ -421,7 +473,7 @@ export default function App() {
                         </Typography>
                       </Box>
                     </Box>
-                    <Typography className={classes.heading}>PHOTOS</Typography>
+                    <Typography className={classes.photos}>PHOTOS</Typography>
                     <Box
                       style={{
                         width: "100%",
