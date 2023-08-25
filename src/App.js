@@ -5,6 +5,8 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandLess";
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+
 import { Box, Button, Container, MenuItem, Select } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import Badge from "@material-ui/core/Badge";
@@ -282,9 +284,11 @@ export default function App() {
         ) => (
           <div key={_index} className={classes.root}>
             <Accordion
+              TransitionProps={{ unmountOnExit: true }}
               expanded={expanded === `panel${_index + 1}`}
               onChange={handleChange(`panel${_index + 1}`)}
               className={classes.customAccordion}
+              disableGutters={true}
             >
               <AccordionSummary
                 classes={{
@@ -296,10 +300,12 @@ export default function App() {
                 style={{
                   transition: "1s",
                 }}
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
+                expandIcon={<ExpandLessIcon />}
+
+              // aria-controls="panel1bh-content"
+              // id="panel1bh-header"
               >
+
                 {index !== _index && (
                   <Box
                     style={{

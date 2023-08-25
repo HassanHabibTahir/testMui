@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
+
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Box } from "@material-ui/core";
 
@@ -10,10 +10,12 @@ const BorderLinearProgress = withStyles((theme) => ({
     borderRadius: 5,
   },
   colorPrimary: {
+    height: 10,
     backgroundColor:
       theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
   },
   bar: {
+    height: 10,
     borderRadius: 5,
     backgroundColor: "#1a90ff",
   },
@@ -56,6 +58,10 @@ export default function CustomizedProgressBars({ percentage }) {
         }}
       >
         <BorderLinearProgress
+
+          className={
+            classes.progress
+          }
           style={{
             transform: "rotate(-90deg)",
             width: 100,
@@ -71,10 +77,10 @@ export default function CustomizedProgressBars({ percentage }) {
           }}
 
           variant="determinate"
-          classes={{
-            root: classes.progressBar,
-            bar: { backgroundColor: 'red' },
-          }}
+          // classes={{
+          //   root: classes.progressBar,
+          //   bar: { backgroundColor: 'red' },
+          // }}
 
           value={+percentage}
         />
