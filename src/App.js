@@ -6,7 +6,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandLess";
 import { Box, Button, Container, MenuItem, Select } from "@material-ui/core";
-
+import CloseIcon from "@material-ui/icons/Close";
 import Badge from "@material-ui/core/Badge";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { itemsArray } from "./DummyData";
@@ -15,7 +15,6 @@ import CustomizedProgressBars from "./progressbar";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-
   },
   additional: {
     fontSize: theme.typography.pxToRem(10),
@@ -24,8 +23,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     color: "black",
     marginLeft: ".5rem",
-    marginTop: '.9rem'
-
+    marginTop: ".9rem",
   },
   photos: {
     fontSize: theme.typography.pxToRem(10),
@@ -34,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     color: "black",
     marginLeft: ".5rem",
-    marginTop: '.9rem'
+    marginTop: ".9rem",
   },
   heading: {
     fontSize: theme.typography.pxToRem(10),
@@ -43,45 +41,44 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     color: "black",
     marginLeft: ".5rem",
-    // marginTop: '.7rem'  
+    // marginTop: '.7rem'
   },
   quantity: {
     fontSize: "9.6px",
     color: "red",
   },
   customAccordion: {
-    margin: '10px 0',
-    '& .MuiAccordion-root': {
-      '&:not(:last-child)': {
+    margin: "10px 0",
+    "& .MuiAccordion-root": {
+      "&:not(:last-child)": {
         marginBottom: 0,
       },
     },
     customAccordionSummaryContent: {
-      '&.Mui-expanded': {
+      "&.Mui-expanded": {
         margin: 0,
-        backgroundColor: 'transparent',
-
+        backgroundColor: "transparent",
       },
     },
 
     position: "relative",
-    marginBottom: '5px',
+    marginBottom: "5px",
     "&.Mui-expanded": {
-      minHeight: 40
+      minHeight: 40,
     },
     "&.MuiAccordionSummary-root": {
-      minHeight: 10
+      minHeight: 10,
     },
     "&.MuiAccordionSummary-content.Mui-expanded": {
-      margin: "0px 0"
-    }
+      margin: "0px 0",
+    },
   },
   customExpandIcon: {
-    transition: 'none',
-    backgroundColor: 'transparent !important',
+    transition: "none",
+    backgroundColor: "transparent !important",
     position: "absolute",
     padding: " 7px 8px 8px 0px",
-    right: '2px',
+    right: "2px",
     color: "black",
     margin: 0,
   },
@@ -111,8 +108,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     fontSize: theme.typography.pxToRem(11),
     width: "90%",
-
-
   },
   footerBadge: {
     display: "flex",
@@ -128,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(9.29),
     fontWeight: 700,
     color: "black",
-    paddingBottom: '.2rem'
+    paddingBottom: ".2rem",
   },
   Mep: {
     fontSize: theme.typography.pxToRem(11),
@@ -168,8 +163,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#4CB6D9",
     background: "#EDEDED",
     padding: "12px 5px",
-    marginLeft: "5px",
-    marginBottom: "5px",
+    // marginLeft: "5px",
+    // marginBottom: "5px",
+    margin: "5px",
   },
   Muiselect: {
     outline: "none",
@@ -183,19 +179,19 @@ const useStyles = makeStyles((theme) => ({
   },
   selectBox: {
     // Remove the padding for the icon
-    paddingRight: '0',
+    paddingRight: "0",
     // Hide the SVG icon
-    '& .MuiSvgIcon-root': {
-      display: 'none',
+    "& .MuiSvgIcon-root": {
+      display: "none",
     },
-    '&:before': {
-      display: 'none', // Hide the underline
+    "&:before": {
+      display: "none", // Hide the underline
     },
-    '&:after': {
-      display: 'none', // Hide the underline
+    "&:after": {
+      display: "none", // Hide the underline
     },
-    '& > .MuiSelect-root': {
-      paddingRight: '0', // Remove space for the icon
+    "& > .MuiSelect-root": {
+      paddingRight: "0", // Remove space for the icon
     },
     width: "100%",
     height: 50,
@@ -211,17 +207,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(10),
   },
 
-
   customAccordionSummaryRoot: {
     alignItems: "flex-start !important",
-    '&.Mui-expanded': {
-      minHeight: '5px',
-      height: '0rem',
+    "&.Mui-expanded": {
+      minHeight: "5px",
+      height: "0rem",
     },
-
   },
-
-
 }));
 
 const StyledINTERIORBadge = withStyles((theme) => ({
@@ -238,6 +230,21 @@ export default function App() {
   const [toggle] = React.useState(true);
   const [selectStatus, setSelectStatus] = React.useState("");
   const [index, setIndex] = React.useState(-1);
+
+  const [fileArray, setFileArray] = React.useState([]);
+
+  const handleAddFile = (event) => {
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      setFileArray((prevArray) => [...prevArray, selectedFile]);
+    }
+  };
+  const handleRemoveFile = (index) => {
+    const newArray = [...fileArray];
+    newArray.splice(index, 1);
+    setFileArray(newArray);
+  };
   const handleStatusChange = (event) => {
     setSelectStatus(event.target.value);
   };
@@ -285,7 +292,6 @@ export default function App() {
                   content: classes.customAccordionSummaryContent,
                   expandIcon: classes.customExpandIcon,
                 }}
-
                 onClick={() => togleHandler(_index, toggle)}
                 style={{
                   transition: "1s",
@@ -333,17 +339,13 @@ export default function App() {
                         0% COMPLETE-ACTON REQUIRED
                       </Typography>
                       <Box className={classes.progressBar}>
-
                         <CustomizedProgressBars percentage={status.progress} />
                       </Box>
                     </Box>
                   </Box>
                 )}
               </AccordionSummary>
-              <AccordionDetails
-
-
-              >
+              <AccordionDetails>
                 <Box
                   style={{
                     width: "100%",
@@ -386,12 +388,12 @@ export default function App() {
                           Install New Master Lock 3-1/14 in. Set-your-won
                           combination Wall Lock Box, attach on grade door frame
                           or around corner from driveway(or as otherwise
-                          directed). Code set to {" "}
+                          directed). Code set to{" "}
                         </Typography>
                         <Typography className={classes.bottomParagraph}>
-                          Front door,car port door ,
-                          utility room deadbolt. exterior storage room keyed
-                          knob. Mounted lock box code 1850.
+                          Front door,car port door , utility room deadbolt.
+                          exterior storage room keyed knob. Mounted lock box
+                          code 1850.
                         </Typography>
                       </Box>
                     </Box>
@@ -477,19 +479,60 @@ export default function App() {
                     <Box
                       style={{
                         width: "100%",
-                        height: 50,
+                        height: "auto",
                         borderRadius: "5px",
                         backgroundColor: "#F7F7F7",
                         padding: "3px 10px",
                       }}
                     >
+                      {/* <Button className={classes.addButton}>Add</Button>
                       <Typography
                         style={{ paddingLeft: "8px" }}
                         className={classes.AddNote}
                       >
                         Photo 1
-                      </Typography>
-                      <Button className={classes.addButton}>Add</Button>
+                      </Typography> */}
+                      <Box>
+                        <input
+                          type="file"
+                          style={{ display: "none" }}
+                          id="fileInput"
+                          onChange={handleAddFile}
+                        />
+                        <label htmlFor="fileInput">
+                          <Button
+                            className={classes.addButton}
+                            component="span"
+                          >
+                            Add
+                          </Button>
+                        </label>
+
+                        {fileArray?.map((fileName, index) => (
+                          <li
+                            key={index}
+                            style={{
+                              background: "#fff",
+                              margin: "8px 0px",
+                              listStyleType: "none",
+                              padding: "10px",
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Typography
+                              style={{ paddingLeft: "8px" }}
+                              className={classes.AddNote}
+                            >
+                              {fileName?.name}
+                            </Typography>
+                            <CloseIcon
+                              style={{ marginLeft: "auto", cursor: "pointer" }}
+                              onClick={() => handleRemoveFile(index)}
+                            />
+                          </li>
+                        ))}
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
