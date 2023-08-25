@@ -4,7 +4,20 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Box } from "@material-ui/core";
 
-
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 10,
+    borderRadius: 5,
+  },
+  colorPrimary: {
+    backgroundColor:
+      theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundColor: "#1a90ff",
+  },
+}))(LinearProgress);
 
 const useStyles = makeStyles({
   root: {
@@ -33,20 +46,7 @@ export default function CustomizedProgressBars({ percentage }) {
     }
   }, [percentage]);
   console.log(percentage, "percentage", color);
-  const BorderLinearProgress = withStyles((theme) => ({
-    root: {
-      height: 10,
-      borderRadius: 5,
-    },
-    colorPrimary: {
-      backgroundColor:
-        theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
-    },
-    bar: {
-      borderRadius: 5,
-      backgroundColor: color,
-    },
-  }))(LinearProgress);
+
   return (
     <div className={classes.root}>
       <Box
@@ -73,7 +73,7 @@ export default function CustomizedProgressBars({ percentage }) {
           variant="determinate"
           classes={{
             root: classes.progressBar,
-            bar: { backgroundColor: color },
+            bar: { backgroundColor: 'red' },
           }}
 
           value={+percentage}
