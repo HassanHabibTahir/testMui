@@ -19,8 +19,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     "&.Mui-disabled": {
       background: "#eaeaea",
-      color: "#c0c0c0"
-    }
+      color: "#c0c0c0",
+
+
+    },
   },
   additional: {
     fontSize: theme.typography.pxToRem(10),
@@ -82,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: ".5rem"
       }
     },
+
   },
 
   customExpandIcon: {
@@ -236,6 +239,9 @@ const useStyles = makeStyles((theme) => ({
       }
     },
   },
+  expandIcon: {
+    marginLeft: '-0.1rem !important',
+  },
 }));
 
 const StyledINTERIORBadge = withStyles((theme) => ({
@@ -321,7 +327,7 @@ export default function App() {
                 style={{
                   transition: "1s",
                 }}
-                expandIcon={<ExpandLessIcon />}
+                expandIcon={<ExpandLessIcon className={classes.expandIcon} />}
 
               // aria-controls="panel1bh-content"
               // id="panel1bh-header"

@@ -43,11 +43,6 @@ export default function CustomizedProgressBars({ percentage }) {
       setColor('#6FCF97'); // Green2
     }
   }, [percentage]);
-  console.log(percentage, "percentage", color);
-
-
-
-
 
   const linearProgressStyles = {
     containerStyles: {
@@ -91,33 +86,7 @@ export default function CustomizedProgressBars({ percentage }) {
           </Box>
         </Box>
 
-        {/* <BorderLinearProgress
 
-          className={
-            classes.progress
-          }
-          style={{
-            transform: "rotate(-90deg)",
-            width: 100,
-            color: "red",
-            // position: "absolute",
-            left: "1.5rem",
-            bottom: "1.5rem",
-            // right: "2rem",
-            // width: 200,
-            // position: "fixed",
-            // top: 190,
-            // left: -50
-          }}
-
-          variant="determinate"
-          // classes={{
-          //   root: classes.progressBar,
-          //   bar: { backgroundColor: 'red' },
-          // }}
-
-          value={+percentage}
-        /> */}
       </Box>
     </div>
   );
