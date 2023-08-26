@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandLess";
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
-import { Box, Button, Container, MenuItem, Select } from "@material-ui/core";
+import { Box, Button, Container, IconButton, MenuItem, Select } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import Badge from "@material-ui/core/Badge";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -17,6 +17,10 @@ import CustomizedProgressBars from "./progressbar";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    "&.Mui-disabled": {
+      background: "#eaeaea",
+      color: "#c0c0c0"
+    }
   },
   additional: {
     fontSize: theme.typography.pxToRem(10),
@@ -73,8 +77,13 @@ const useStyles = makeStyles((theme) => ({
     },
     "&.MuiAccordionSummary-content.Mui-expanded": {
       margin: "0px 0",
+      marginLeft: ".5rem",
+      "&.MuiIconButton-label": {
+        marginLeft: ".5rem"
+      }
     },
   },
+
   customExpandIcon: {
     transition: "none",
     backgroundColor: "transparent !important",
@@ -83,6 +92,14 @@ const useStyles = makeStyles((theme) => ({
     right: "2px",
     color: "black",
     margin: 0,
+    marginLeft: ".5rem",
+    "&.Mui-disabled": {
+      background: "#eaeaea",
+      color: "#c0c0c0"
+    }
+  },
+  customIconButtonLabel: {
+    marginLeft: "1rem"
   },
   parentHeading: {
     display: "flex",
@@ -214,6 +231,9 @@ const useStyles = makeStyles((theme) => ({
     "&.Mui-expanded": {
       minHeight: "5px",
       height: "0rem",
+      "&.MuiIconButton-label": {
+        marginLeft: ".5rem"
+      }
     },
   },
 }));
@@ -295,6 +315,7 @@ export default function App() {
                   root: classes.customAccordionSummaryRoot,
                   content: classes.customAccordionSummaryContent,
                   expandIcon: classes.customExpandIcon,
+                  label: classes.customIconButtonLabel
                 }}
                 onClick={() => togleHandler(_index, toggle)}
                 style={{
@@ -328,7 +349,7 @@ export default function App() {
                       </Box>
 
                       <Typography className={classes.quantity}>
-                        QTY 1
+                        QTY {quantity}
                       </Typography>
                     </Box>
                     <Typography className={classes.subHeading}>

@@ -22,17 +22,13 @@ const BorderLinearProgress = withStyles((theme) => ({
 }))(LinearProgress);
 
 const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
+
 });
 
 export default function CustomizedProgressBars({ percentage }) {
   const classes = useStyles();
 
   const [color, setColor] = useState('#EB5757'); // Default color
-
-
 
   useEffect(() => {
     if (percentage <= 25) {
@@ -49,15 +45,53 @@ export default function CustomizedProgressBars({ percentage }) {
   }, [percentage]);
   console.log(percentage, "percentage", color);
 
+
+
+
+
+  const linearProgressStyles = {
+    containerStyles: {
+      height: 15,
+      width: '100%',
+      backgroundColor: "#e0e0de",
+      borderRadius: 50,
+      transform: "rotate(-90deg)",
+      position: "absolute",
+      left: "1.5rem",
+      bottom: "1.5rem",
+    },
+    fillerStyles: {
+      height: '100%',
+      width: `${percentage}%`,
+      backgroundColor: color,
+      borderRadius: 'inherit',
+      textAlign: 'right'
+    },
+    labelStyles: {
+      padding: 5,
+      color: 'white',
+      fontWeight: 'bold'
+    }
+
+  };
+
+
   return (
     <div className={classes.root}>
       <Box
         style={{
           display: "flex",
           justifyContent: "flex-end",
+          position: "relative"
         }}
       >
-        <BorderLinearProgress
+        <Box style={linearProgressStyles.containerStyles}>
+          <Box style={linearProgressStyles.fillerStyles}>
+
+          </Box>
+        </Box>
+
+        {/* <BorderLinearProgress
 
           className={
             classes.progress
@@ -83,7 +117,7 @@ export default function CustomizedProgressBars({ percentage }) {
           // }}
 
           value={+percentage}
-        />
+        /> */}
       </Box>
     </div>
   );
