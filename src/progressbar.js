@@ -4,22 +4,6 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Box } from "@material-ui/core";
 
-const BorderLinearProgress = withStyles((theme) => ({
-  root: {
-    height: 10,
-    borderRadius: 5,
-  },
-  colorPrimary: {
-    height: 10,
-    backgroundColor:
-      theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
-  },
-  bar: {
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: "#1a90ff",
-  },
-}))(LinearProgress);
 
 const useStyles = makeStyles({
 
@@ -46,14 +30,14 @@ export default function CustomizedProgressBars({ percentage }) {
 
   const linearProgressStyles = {
     containerStyles: {
-      height: 15,
+      height: 13,
       width: '100%',
       backgroundColor: "#e0e0de",
       borderRadius: 50,
       transform: "rotate(-90deg)",
       position: "absolute",
       left: "1.5rem",
-      bottom: "1.5rem",
+      bottom: "1rem",
     },
     fillerStyles: {
       height: '100%',

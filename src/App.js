@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
   },
   customAccordion: {
-    margin: "10px 0",
+    // margin: "10px 0",
     "& .MuiAccordion-root": {
       "&:not(:last-child)": {
         marginBottom: 0,
@@ -95,7 +95,10 @@ const useStyles = makeStyles((theme) => ({
     right: "2px",
     color: "black",
     margin: 0,
-    marginLeft: ".5rem",
+    top: "0rem",
+    // marginLeft: ".5rem",
+
+    transform: 'rotate(0deg)',
     "&.Mui-disabled": {
       background: "#eaeaea",
       color: "#c0c0c0"
@@ -291,7 +294,7 @@ export default function App() {
     }
   };
 
-  console.log(index, "index");
+  console.log(expanded, "index");
 
   return (
     <Container maxWidth="sm">
@@ -310,11 +313,11 @@ export default function App() {
         ) => (
           <div key={_index} className={classes.root}>
             <Accordion
-              TransitionProps={{ unmountOnExit: true }}
+              TransitionProps={{ unmountOnExit: false }}
               expanded={expanded === `panel${_index + 1}`}
               onChange={handleChange(`panel${_index + 1}`)}
               className={classes.customAccordion}
-              disableGutters={true}
+              disableGutters={false}
             >
               <AccordionSummary
                 classes={{
@@ -327,12 +330,23 @@ export default function App() {
                 style={{
                   transition: "1s",
                 }}
-                expandIcon={<ExpandLessIcon className={classes.expandIcon} />}
+              // expandIcon={<ExpandLessIcon className={classes.expandIcon}
+              //   style={{
+              //     transform: toggle ? 'rotate(180deg)' : 'rotate(0deg)'
+              //   }}
+              // />}
 
               // aria-controls="panel1bh-content"
               // id="panel1bh-header"
               >
+                <IconButton
+                  className={classes.customExpandIcon}
+                  style={{ transform: expanded === `panel${_index + 1}` ? 'rotate(180deg)' : 'rotate(0deg)', background: 'transparent', }}
+                >
+                  {/* <ExpandMoreIcon /> */}
+                  <ExpandLessIcon />
 
+                </IconButton>
                 {index !== _index && (
                   <Box
                     style={{
@@ -377,6 +391,7 @@ export default function App() {
                     </Box>
                   </Box>
                 )}
+
               </AccordionSummary>
               <AccordionDetails>
                 <Box

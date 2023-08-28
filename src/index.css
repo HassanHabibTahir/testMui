@@ -4,3 +4,12 @@
 /* .MuiAccordionSummary-expandIcon.Mui-expanded {
   margin-left: 0.5rem !important;
 } */
+
+/* Assuming you have a class for your custom ExpandLessIcon */
+.customExpandIcon:focus,
+.customExpandIcon:active {
+  background-color: transparent !important;
+  /* You can also reset other properties as needed */
+  box-shadow: none !important;
+  outline: none !important;
+}
