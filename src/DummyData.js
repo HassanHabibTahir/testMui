@@ -2,7 +2,7 @@ export const itemsArray = [
     {
         "productName": "Whole House Clean",
         "amount": 225,
-        "id": "a1N78000000hiByEAI",
+        "id": "a1N78000000hiByEAI1",
         "item": "Clean - Whole House Interior - includes appliance wipe down",
         "product_description": "Clean - Whole House Interior - includes appliance wipe down Clean - Whole House Interior - includes appliance wipe down",
         "quantity": 1,
@@ -16,7 +16,7 @@ export const itemsArray = [
     {
         "productName": "Kitchen Clean",
         "amount": 150,
-        "id": "a1N78000000hiByEAB",
+        "id": "a1N78000000hiByEAB2",
         "item": "Clean - Kitchen - includes countertop and sink",
         "product_description": "Clean - Whole House Interior - includes appliance wipe down Clean - Whole House Interior - includes appliance wipe down",
         "quantity": 1,
@@ -30,7 +30,7 @@ export const itemsArray = [
     {
         "productName": "Bathroom Clean",
         "amount": 100,
-        "id": "a1N78000000hiByEAC",
+        "id": "a1N78000000hiByEAC3",
         "item": "Clean - Bathroom - includes toilet and shower",
         "product_description": null,
         "quantity": 1,
@@ -44,7 +44,7 @@ export const itemsArray = [
     {
         "productName": "Living Room Clean",
         "amount": 180,
-        "id": "a1N78000000hiByEAD",
+        "id": "a1N78000000hiByEAD4",
         "item": "Clean - Living Room - includes dusting and vacuuming",
         "product_description": null,
         "quantity": 1,
@@ -58,7 +58,7 @@ export const itemsArray = [
     {
         "productName": "Bedroom Clean",
         "amount": 120,
-        "id": "a1N78000000hiByEAE",
+        "id": "a1N78000000hiByEAE5",
         "item": "Clean - Bedroom - includes changing bed linens",
         "product_description": null,
         "quantity": 1,

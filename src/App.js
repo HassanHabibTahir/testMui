@@ -264,17 +264,44 @@ export default function App() {
 
   const [fileArray, setFileArray] = React.useState([]);
 
-  const handleAddFile = (event) => {
+  const handleAddFile = (event, index) => {
     const selectedFile = event.target.files[0];
-
     if (selectedFile) {
-      setFileArray((prevArray) => [...prevArray, selectedFile]);
+      setFileArray((prevArray) => {
+        const updatedArray = [...prevArray];
+        const existingObjIndex = updatedArray.findIndex(item => item.id === index);
+        if (existingObjIndex !== -1) {
+          updatedArray[existingObjIndex].files.push(selectedFile);
+        } else {
+          updatedArray.push({
+            id: index,
+            files: [selectedFile]
+          });
+        }
+        return updatedArray;
+      });
     }
   };
-  const handleRemoveFile = (index) => {
-    const newArray = [...fileArray];
-    newArray.splice(index, 1);
-    setFileArray(newArray);
+
+  // const newArray = [...fileArray];
+  // newArray.splice(index, 1);
+  // setFileArray(newArray);
+  const handleRemoveFile = (id, index) => {
+    console.log(id, "id")
+    setFileArray((prevArray) => {
+      const updatedArray = prevArray.map(item => {
+        if (item.id === id) {
+          console.log(item, "----------->")
+          console.log(item, "item==========>")
+          return {
+            ...item,
+            files: item.files.filter((file, fileIndex) => fileIndex !== index)
+          };
+        }
+        return item;
+      });
+      return updatedArray;
+    });
   };
   const handleStatusChange = (event) => {
     setSelectStatus(event.target.value);
@@ -294,7 +321,7 @@ export default function App() {
     }
   };
 
-  console.log(expanded, "index");
+
 
   return (
     <Container maxWidth="sm">
@@ -544,11 +571,12 @@ export default function App() {
                         <input
                           type="file"
                           style={{ display: "none" }}
-                          id="fileInput"
-                          onChange={handleAddFile}
+                          id={`fileInput-${_index}`}
+                          onChange={(e) => handleAddFile(e, id)}
                         />
-                        <label htmlFor="fileInput">
+                        <label htmlFor={`fileInput-${_index}`}>
                           <Button
+                            onClick={() => console.log(id, "id")}
                             className={classes.addButton}
                             component="span"
                           >
@@ -556,29 +584,34 @@ export default function App() {
                           </Button>
                         </label>
 
-                        {fileArray?.map((fileName, index) => (
-                          <li
-                            key={index}
-                            style={{
-                              background: "#fff",
-                              margin: "8px 0px",
-                              listStyleType: "none",
-                              padding: "10px",
-                              display: "flex",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Typography
-                              style={{ paddingLeft: "8px" }}
-                              className={classes.AddNote}
-                            >
-                              {fileName?.name}
-                            </Typography>
-                            <CloseIcon
-                              style={{ marginLeft: "auto", cursor: "pointer" }}
-                              onClick={() => handleRemoveFile(index)}
-                            />
-                          </li>
+                        {fileArray?.map((item, index) => (
+                          <>
+                            {item.id === id ? item.files.map((file, index) => <>
+                              <li
+                                key={index}
+                                style={{
+                                  background: "#fff",
+                                  margin: "8px 0px",
+                                  listStyleType: "none",
+                                  padding: "10px",
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Typography
+                                  style={{ paddingLeft: "8px" }}
+                                  className={classes.AddNote}
+                                >
+                                  {file?.name}
+                                </Typography>
+                                <CloseIcon
+                                  style={{ marginLeft: "auto", cursor: "pointer" }}
+                                  onClick={() => handleRemoveFile(item.id, index)}
+                                />
+                              </li>
+                            </>) : ""}
+                          </>
+
                         ))}
                       </Box>
                     </Box>
