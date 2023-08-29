@@ -5,14 +5,22 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandLess";
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
-import { Box, Button, Container, IconButton, MenuItem, Select } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  IconButton,
+  MenuItem,
+  Select,
+} from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import Badge from "@material-ui/core/Badge";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { itemsArray } from "./DummyData";
 import CustomizedProgressBars from "./progressbar";
+import CustomizedDialogs from "./CustomizedDialogs";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,8 +28,6 @@ const useStyles = makeStyles((theme) => ({
     "&.Mui-disabled": {
       background: "#eaeaea",
       color: "#c0c0c0",
-
-
     },
   },
   additional: {
@@ -81,10 +87,9 @@ const useStyles = makeStyles((theme) => ({
       margin: "0px 0",
       marginLeft: ".5rem",
       "&.MuiIconButton-label": {
-        marginLeft: ".5rem"
-      }
+        marginLeft: ".5rem",
+      },
     },
-
   },
 
   customExpandIcon: {
@@ -98,14 +103,14 @@ const useStyles = makeStyles((theme) => ({
     top: "0rem",
     // marginLeft: ".5rem",
 
-    transform: 'rotate(0deg)',
+    transform: "rotate(0deg)",
     "&.Mui-disabled": {
       background: "#eaeaea",
-      color: "#c0c0c0"
-    }
+      color: "#c0c0c0",
+    },
   },
   customIconButtonLabel: {
-    marginLeft: "1rem"
+    marginLeft: "1rem",
   },
   parentHeading: {
     display: "flex",
@@ -238,12 +243,12 @@ const useStyles = makeStyles((theme) => ({
       minHeight: "5px",
       height: "0rem",
       "&.MuiIconButton-label": {
-        marginLeft: ".5rem"
-      }
+        marginLeft: ".5rem",
+      },
     },
   },
   expandIcon: {
-    marginLeft: '-0.1rem !important',
+    marginLeft: "-0.1rem !important",
   },
 }));
 
@@ -261,21 +266,28 @@ export default function App() {
   const [toggle] = React.useState(true);
   const [selectStatus, setSelectStatus] = React.useState("");
   const [index, setIndex] = React.useState(-1);
-
   const [fileArray, setFileArray] = React.useState([]);
+  const [showDialog, setShowDialog] = React.useState(false);
+  const [noteArray, setNoteArray] = React.useState([]);
+  const [note, setNote] = React.useState("");
 
+  const handleCloseDialog = () => {
+    setShowDialog(false);
+  };
   const handleAddFile = (event, index) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       setFileArray((prevArray) => {
         const updatedArray = [...prevArray];
-        const existingObjIndex = updatedArray.findIndex(item => item.id === index);
+        const existingObjIndex = updatedArray.findIndex(
+          (item) => item.id === index
+        );
         if (existingObjIndex !== -1) {
           updatedArray[existingObjIndex].files.push(selectedFile);
         } else {
           updatedArray.push({
             id: index,
-            files: [selectedFile]
+            files: [selectedFile],
           });
         }
         return updatedArray;
@@ -287,15 +299,12 @@ export default function App() {
   // newArray.splice(index, 1);
   // setFileArray(newArray);
   const handleRemoveFile = (id, index) => {
-    console.log(id, "id")
     setFileArray((prevArray) => {
-      const updatedArray = prevArray.map(item => {
+      const updatedArray = prevArray.map((item) => {
         if (item.id === id) {
-          console.log(item, "----------->")
-          console.log(item, "item==========>")
           return {
             ...item,
-            files: item.files.filter((file, fileIndex) => fileIndex !== index)
+            files: item.files.filter((file, fileIndex) => fileIndex !== index),
           };
         }
         return item;
@@ -309,8 +318,25 @@ export default function App() {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const handleButtonClick = () => {
-    // Handle button click here
+
+  const handleAddNote = (e, id) => {
+    setShowDialog(true);
+    if (note) {
+      const updatedNoteArray = [...noteArray];
+      const existingNoteIndex = updatedNoteArray.findIndex(
+        (item) => item.id === id
+      );
+
+      if (existingNoteIndex !== -1) {
+        updatedNoteArray[existingNoteIndex].note.push(note);
+      } else {
+        updatedNoteArray.push({
+          id: id,
+          note: [note],
+        });
+      }
+      setNoteArray(updatedNoteArray);
+    }
   };
 
   const togleHandler = (_index, toggle) => {
@@ -320,9 +346,7 @@ export default function App() {
       setIndex(_index);
     }
   };
-
-
-
+  console.log("noteArray", noteArray);
   return (
     <Container maxWidth="sm">
       {itemsArray.map(
@@ -351,28 +375,33 @@ export default function App() {
                   root: classes.customAccordionSummaryRoot,
                   content: classes.customAccordionSummaryContent,
                   expandIcon: classes.customExpandIcon,
-                  label: classes.customIconButtonLabel
+                  label: classes.customIconButtonLabel,
                 }}
                 onClick={() => togleHandler(_index, toggle)}
                 style={{
                   transition: "1s",
                 }}
-              // expandIcon={<ExpandLessIcon className={classes.expandIcon}
-              //   style={{
-              //     transform: toggle ? 'rotate(180deg)' : 'rotate(0deg)'
-              //   }}
-              // />}
+                // expandIcon={<ExpandLessIcon className={classes.expandIcon}
+                //   style={{
+                //     transform: toggle ? 'rotate(180deg)' : 'rotate(0deg)'
+                //   }}
+                // />}
 
-              // aria-controls="panel1bh-content"
-              // id="panel1bh-header"
+                // aria-controls="panel1bh-content"
+                // id="panel1bh-header"
               >
                 <IconButton
                   className={classes.customExpandIcon}
-                  style={{ transform: expanded === `panel${_index + 1}` ? 'rotate(180deg)' : 'rotate(0deg)', background: 'transparent', }}
+                  style={{
+                    transform:
+                      expanded === `panel${_index + 1}`
+                        ? "rotate(180deg)"
+                        : "rotate(0deg)",
+                    background: "transparent",
+                  }}
                 >
                   {/* <ExpandMoreIcon /> */}
                   <ExpandLessIcon />
-
                 </IconButton>
                 {index !== _index && (
                   <Box
@@ -418,7 +447,6 @@ export default function App() {
                     </Box>
                   </Box>
                 )}
-
               </AccordionSummary>
               <AccordionDetails>
                 <Box
@@ -539,7 +567,7 @@ export default function App() {
                         }}
                       >
                         <AddCircleIcon
-                          onClick={handleButtonClick}
+                          onClick={(e) => handleAddNote(e, id)}
                           style={{
                             color: "#4CB6D9",
                             cursor: "pointer",
@@ -548,6 +576,16 @@ export default function App() {
                         <Typography className={classes.AddNote}>
                           Add Note
                         </Typography>
+
+                        <CustomizedDialogs
+                          open={showDialog}
+                          onClose={handleCloseDialog}
+                          onAddNote={handleAddNote}
+                          itemIndex={index}
+                          noteArray={noteArray}
+                          note={note}
+                          setNote={setNote}
+                        />
                       </Box>
                     </Box>
                     <Typography className={classes.photos}>PHOTOS</Typography>
@@ -586,32 +624,40 @@ export default function App() {
 
                         {fileArray?.map((item, index) => (
                           <>
-                            {item.id === id ? item.files.map((file, index) => <>
-                              <li
-                                key={index}
-                                style={{
-                                  background: "#fff",
-                                  margin: "8px 0px",
-                                  listStyleType: "none",
-                                  padding: "10px",
-                                  display: "flex",
-                                  alignItems: "center",
-                                }}
-                              >
-                                <Typography
-                                  style={{ paddingLeft: "8px" }}
-                                  className={classes.AddNote}
-                                >
-                                  {file?.name}
-                                </Typography>
-                                <CloseIcon
-                                  style={{ marginLeft: "auto", cursor: "pointer" }}
-                                  onClick={() => handleRemoveFile(item.id, index)}
-                                />
-                              </li>
-                            </>) : ""}
+                            {item.id === id
+                              ? item.files.map((file, index) => (
+                                  <>
+                                    <li
+                                      key={index}
+                                      style={{
+                                        background: "#fff",
+                                        margin: "8px 0px",
+                                        listStyleType: "none",
+                                        padding: "10px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <Typography
+                                        style={{ paddingLeft: "8px" }}
+                                        className={classes.AddNote}
+                                      >
+                                        {file?.name}
+                                      </Typography>
+                                      <CloseIcon
+                                        style={{
+                                          marginLeft: "auto",
+                                          cursor: "pointer",
+                                        }}
+                                        onClick={() =>
+                                          handleRemoveFile(item.id, index)
+                                        }
+                                      />
+                                    </li>
+                                  </>
+                                ))
+                              : ""}
                           </>
-
                         ))}
                       </Box>
                     </Box>
