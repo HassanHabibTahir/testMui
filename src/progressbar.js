@@ -8,7 +8,6 @@ const useStyles = makeStyles({});
 
 export default function CustomizedProgressBars({ percentage }) {
   const classes = useStyles();
-
   const [color, setColor] = useState("#EB5757");
   useEffect(() => {
     switch (true) {
@@ -51,7 +50,7 @@ export default function CustomizedProgressBars({ percentage }) {
     containerStyles: {
       height: 13,
       width: "100%",
-      backgroundColor: "#e0e0de",
+      backgroundColor: `${+percentage === 0 ? "transparent" : "#e0e0de"}`,
       borderRadius: 50,
       transform: "rotate(-90deg)",
       position: "absolute",

@@ -345,6 +345,13 @@ export default function App() {
     setShowDialog((prev) => ({ ...prev, [id]: false }));
   };
 
+  const removeHandler = (id) => {
+    console.log(id, "id==========>")
+    setShowDialog((prev) => ({ ...prev, [id]: false }));
+
+  }
+
+
   const togleHandler = (_index, toggle) => {
     if (index === _index) {
       setIndex(-1);
@@ -595,19 +602,29 @@ export default function App() {
                           style={{
                             marginTop: "5px",
                             textAlign: "center",
+                            position: "relative",
                           }}
                         >
+                          <Box
+                            style={{
+                              position: "absolute",
+                              right: ".5rem",
+                              cursor: "pointer"
+                            }}
+                            onClick={() => removeHandler(id)}
+                          >X</Box>
                           <textarea
                             style={{
-                              border: "1px solid #4CB6D9",
+
+                              backgroundColor: "#F2F2F2",
                               outline: "none",
                               width: "100%",
                               padding: "5px",
+                              border: "none",
                             }}
                             rows="3"
                             value={note}
                             onChange={(event) => setNote(event.target.value)}
-                            placeholder="Enter your note..."
                           />
                           <Button
                             className={classes.addButton}
