@@ -291,8 +291,7 @@ export default function App() {
     setFileArray((prevArray) => {
       const updatedArray = prevArray.map(item => {
         if (item.id === id) {
-          console.log(item, "----------->")
-          console.log(item, "item==========>")
+
           return {
             ...item,
             files: item.files.filter((file, fileIndex) => fileIndex !== index)
