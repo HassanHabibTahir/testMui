@@ -346,8 +346,9 @@ export default function App() {
   };
 
   const removeHandler = (id) => {
-    console.log(id, "id==========>")
+
     setShowDialog((prev) => ({ ...prev, [id]: false }));
+    setNote("")
 
   }
 
@@ -605,17 +606,18 @@ export default function App() {
                             position: "relative",
                           }}
                         >
-                          <Box
+                          {note && <Box
                             style={{
                               position: "absolute",
                               right: ".5rem",
                               cursor: "pointer"
                             }}
                             onClick={() => removeHandler(id)}
-                          >X</Box>
+                          >X</Box>}
                           <textarea
                             style={{
-
+                              overflow: "hidden",
+                              resize: "none",
                               backgroundColor: "#F2F2F2",
                               outline: "none",
                               width: "100%",
@@ -626,7 +628,7 @@ export default function App() {
                             value={note}
                             onChange={(event) => setNote(event.target.value)}
                           />
-                          <Button
+                          {/* <Button
                             className={classes.addButton}
                             onClick={() => handleAddNote(id)}
                             style={{
@@ -634,7 +636,7 @@ export default function App() {
                             }}
                           >
                             Add Note
-                          </Button>
+                          </Button> */}
                         </Box>
                       )}
                     </Box>
@@ -685,7 +687,7 @@ export default function App() {
                                       <Typography style={{
                                         fontSize: "10px",
                                         marginLeft: ".7rem"
-                                      }}>photos {+index + 1} </Typography>
+                                      }}>Photo {+index + 1} </Typography>
                                       <Typography
                                         style={{ paddingLeft: "8px" }}
                                         className={classes.AddNote}
