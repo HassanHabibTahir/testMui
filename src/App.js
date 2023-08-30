@@ -351,8 +351,6 @@ export default function App() {
     setNote("")
 
   }
-
-
   const togleHandler = (_index, toggle) => {
     if (index === _index) {
       setIndex(-1);
