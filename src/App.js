@@ -146,7 +146,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   footerText: {
-    color: "red",
+
     fontSize: "9.6px",
   },
   trade: {
@@ -387,14 +387,14 @@ export default function App() {
                 style={{
                   transition: "1s",
                 }}
-                // expandIcon={<ExpandLessIcon className={classes.expandIcon}
-                //   style={{
-                //     transform: toggle ? 'rotate(180deg)' : 'rotate(0deg)'
-                //   }}
-                // />}
+              // expandIcon={<ExpandLessIcon className={classes.expandIcon}
+              //   style={{
+              //     transform: toggle ? 'rotate(180deg)' : 'rotate(0deg)'
+              //   }}
+              // />}
 
-                // aria-controls="panel1bh-content"
-                // id="panel1bh-header"
+              // aria-controls="panel1bh-content"
+              // id="panel1bh-header"
               >
                 <IconButton
                   className={classes.customExpandIcon}
@@ -443,9 +443,11 @@ export default function App() {
                       storage room keyed knob. Mounted Lock
                     </Typography>
 
-                    <Box className={classes.footerBadge}>
-                      <Typography className={classes.footerText}>
-                        0% COMPLETE-ACTON REQUIRED
+                    <Box className={classes.footerBadge}  >
+                      <Typography className={classes.footerText} style={{
+                        color: +status.progress === 0 ? "red" : "black"
+                      }}>
+                        {+status.progress}% COMPLETE-ACTON REQUIRED
                       </Typography>
                       <Box className={classes.progressBar}>
                         <CustomizedProgressBars percentage={status.progress} />
@@ -530,11 +532,20 @@ export default function App() {
                       <MenuItem className={classes.menuItem} value="">
                         Select
                       </MenuItem>
-                      <MenuItem className={classes.menuItem} value={"active"}>
-                        Active
+                      <MenuItem className={classes.menuItem} value={"0% Complete"}>
+                        0% Complete
                       </MenuItem>
-                      <MenuItem className={classes.menuItem} value={"inactive"}>
-                        Inactive
+                      <MenuItem className={classes.menuItem} value={"25% Complete"}>
+                        25% Complete
+                      </MenuItem>
+                      <MenuItem className={classes.menuItem} value={"50% Complete"}>
+                        50% Complete
+                      </MenuItem>
+                      <MenuItem className={classes.menuItem} value={"75% Complete"}>
+                        75% Complete
+                      </MenuItem>
+                      <MenuItem className={classes.menuItem} value={"100% Complete"}>
+                        100% Complete
                       </MenuItem>
                     </Select>
                     <Box
@@ -641,36 +652,42 @@ export default function App() {
                           <>
                             {item.id === id
                               ? item.files.map((file, index) => (
-                                  <>
-                                    <li
-                                      key={index}
-                                      style={{
-                                        background: "#fff",
-                                        margin: "8px 0px",
-                                        listStyleType: "none",
-                                        padding: "10px",
-                                        display: "flex",
-                                        alignItems: "center",
-                                      }}
-                                    >
+                                <>
+                                  <li
+                                    key={index}
+                                    style={{
+                                      background: "#fff",
+                                      margin: "8px 0px",
+                                      listStyleType: "none",
+                                      padding: "10px",
+                                      display: "flex",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    <Box>
+                                      <Typography style={{
+                                        fontSize: "10px",
+                                        marginLeft: ".7rem"
+                                      }}>photos {+index} </Typography>
                                       <Typography
                                         style={{ paddingLeft: "8px" }}
                                         className={classes.AddNote}
                                       >
                                         {file?.name}
                                       </Typography>
-                                      <CloseIcon
-                                        style={{
-                                          marginLeft: "auto",
-                                          cursor: "pointer",
-                                        }}
-                                        onClick={() =>
-                                          handleRemoveFile(item.id, index)
-                                        }
-                                      />
-                                    </li>
-                                  </>
-                                ))
+                                    </Box>
+                                    <CloseIcon
+                                      style={{
+                                        marginLeft: "auto",
+                                        cursor: "pointer",
+                                      }}
+                                      onClick={() =>
+                                        handleRemoveFile(item.id, index)
+                                      }
+                                    />
+                                  </li>
+                                </>
+                              ))
                               : ""}
                           </>
                         ))}
