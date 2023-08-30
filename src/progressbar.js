@@ -11,29 +11,41 @@ export default function CustomizedProgressBars({ percentage }) {
 
   const [color, setColor] = useState("#EB5757");
   useEffect(() => {
-    if (+percentage === 0) {
-      setColor("#EB5757");
-    } else if (percentage <= 25) {
-      setColor("#007AFF");
-    } else if (percentage <= 50) {
-      setColor("#2D9CDB");
-    } else if (percentage <= 75) {
-      setColor("#31CAAE");
-    } else if (percentage <= 100) {
-      setColor("#6FCF97");
+    switch (true) {
+      case +percentage === 0:
+        setColor("#EB5757");
+        break;
+      case percentage <= 25:
+        setColor("#007AFF");
+        break;
+      case percentage <= 50:
+        setColor("#2D9CDB");
+        break;
+      case percentage <= 75:
+        setColor("#31CAAE");
+        break;
+      case percentage <= 100:
+        setColor("#6FCF97");
+        break;
+      default: setColor("#EB5757")
+        // Handle any other cases here
+        break;
     }
+
+
+    // if (+percentage === 0) {
+    //   setColor("#EB5757");
+    // } else if (percentage <= 25) {
+    //   setColor("#007AFF");
+    // } else if (percentage <= 50) {
+    //   setColor("#2D9CDB");
+    // } else if (percentage <= 75) {
+    //   setColor("#31CAAE");
+    // } else if (percentage <= 100) {
+    //   setColor("#6FCF97");
+    // }
   }, [percentage]);
-  // if (percentage <= 25) {
-  //   setColor("#EB5757");
-  // } else if (percentage <= 50) {
-  //   setColor("#007AFF");
-  // } else if (percentage <= 75) {
-  //   setColor("#2D9CDB");
-  // } else if (percentage <= 100) {
-  //   setColor("#31CAAE");
-  // } else {
-  //   setColor("#6FCF97");
-  // }
+
 
   const linearProgressStyles = {
     containerStyles: {
@@ -48,7 +60,7 @@ export default function CustomizedProgressBars({ percentage }) {
     },
     fillerStyles: {
       height: "100%",
-      width: `${+percentage === 0 ? 15 : +percentage}%`,
+      width: `${+percentage === 0 ? 20 : +percentage}%`,
       backgroundColor: color,
       borderRadius: "inherit",
       textAlign: "right",

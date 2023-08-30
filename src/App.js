@@ -381,14 +381,14 @@ export default function App() {
                 style={{
                   transition: "1s",
                 }}
-                // expandIcon={<ExpandLessIcon className={classes.expandIcon}
-                //   style={{
-                //     transform: toggle ? 'rotate(180deg)' : 'rotate(0deg)'
-                //   }}
-                // />}
+              // expandIcon={<ExpandLessIcon className={classes.expandIcon}
+              //   style={{
+              //     transform: toggle ? 'rotate(180deg)' : 'rotate(0deg)'
+              //   }}
+              // />}
 
-                // aria-controls="panel1bh-content"
-                // id="panel1bh-header"
+              // aria-controls="panel1bh-content"
+              // id="panel1bh-header"
               >
                 <IconButton
                   className={classes.customExpandIcon}
@@ -639,36 +639,36 @@ export default function App() {
                           <>
                             {item.id === id
                               ? item.files.map((file, index) => (
-                                  <>
-                                    <li
-                                      key={index}
-                                      style={{
-                                        background: "#fff",
-                                        margin: "8px 0px",
-                                        listStyleType: "none",
-                                        padding: "10px",
-                                        display: "flex",
-                                        alignItems: "center",
-                                      }}
+                                <>
+                                  <li
+                                    key={index}
+                                    style={{
+                                      background: "#fff",
+                                      margin: "8px 0px",
+                                      listStyleType: "none",
+                                      padding: "10px",
+                                      display: "flex",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    <Typography
+                                      style={{ paddingLeft: "8px" }}
+                                      className={classes.AddNote}
                                     >
-                                      <Typography
-                                        style={{ paddingLeft: "8px" }}
-                                        className={classes.AddNote}
-                                      >
-                                        {file?.name}
-                                      </Typography>
-                                      <CloseIcon
-                                        style={{
-                                          marginLeft: "auto",
-                                          cursor: "pointer",
-                                        }}
-                                        onClick={() =>
-                                          handleRemoveFile(item.id, index)
-                                        }
-                                      />
-                                    </li>
-                                  </>
-                                ))
+                                      {file?.name}
+                                    </Typography>
+                                    <CloseIcon
+                                      style={{
+                                        marginLeft: "auto",
+                                        cursor: "pointer",
+                                      }}
+                                      onClick={() =>
+                                        handleRemoveFile(item.id, index)
+                                      }
+                                    />
+                                  </li>
+                                </>
+                              ))
                               : ""}
                           </>
                         ))}
