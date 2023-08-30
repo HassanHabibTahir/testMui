@@ -324,31 +324,42 @@ export default function App() {
   const showAddNote = (id) => {
     setShowDialog((prev) => ({ ...prev, [id]: !prev[id] }));
   };
-  const handleAddNote = (id) => {
-    if (note) {
-      const updatedNoteArray = [...noteArray];
-      const existingNoteIndex = updatedNoteArray.findIndex(
-        (item) => item.id === id
-      );
+  // const handleAddNote = (id) => {
+  //   if (note) {
+  //     const updatedNoteArray = [...noteArray];
+  //     const existingNoteIndex = updatedNoteArray.findIndex(
+  //       (item) => item.id === id
+  //     );
 
-      if (existingNoteIndex !== -1) {
-        updatedNoteArray[existingNoteIndex].note.push(note);
-      } else {
-        updatedNoteArray.push({
-          id: id,
-          note: [note],
-        });
-      }
-      setNoteArray(updatedNoteArray);
-    }
-    setNote("");
-    setShowDialog((prev) => ({ ...prev, [id]: false }));
-  };
+  //     if (existingNoteIndex !== -1) {
+  //       updatedNoteArray[existingNoteIndex].note.push(note);
+  //     } else {
+  //       updatedNoteArray.push({
+  //         id: id,
+  //         note: [note],
+  //       });
+  //     }
+  //     setNoteArray(updatedNoteArray);
+  //   }
+  //   setNote("");
+  //   setShowDialog((prev) => ({ ...prev, [id]: false }));
+  // };
 
   const removeHandler = (id) => {
+    const existingNoteIndex = noteArray.findIndex((item) => item.id === id);
 
     setShowDialog((prev) => ({ ...prev, [id]: false }));
-    setNote("")
+    console.log(id, existingNoteIndex)
+
+    const updatedNoteArray = noteArray?.map((item) => {
+      if (item.id === id) {
+        return { ...item, note: '' };
+      }
+      return item;
+    });
+    setNoteArray(updatedNoteArray);
+
+
 
   }
   const togleHandler = (_index, toggle) => {
@@ -358,7 +369,30 @@ export default function App() {
       setIndex(_index);
     }
   };
-  console.log("noteArray", noteArray);
+
+
+  const setNoteHanlder = (event, id) => {
+    const existingNoteIndex = noteArray.findIndex((item) => item.id === id);
+
+    if (existingNoteIndex !== -1) {
+      const updatedNoteArray = noteArray.map((item) => {
+        if (item.id === id) {
+          return { ...item, note: event.target.value };
+        }
+        return item;
+      });
+      setNoteArray(updatedNoteArray);
+    } else {
+      const updatedNoteArray = [
+        ...noteArray,
+        { id: id, note: event.target.value }
+      ];
+      setNoteArray(updatedNoteArray);
+    }
+  }
+
+  console.log(noteArray);
+
   return (
     <Container maxWidth="sm">
       {itemsArray.map(
@@ -594,7 +628,8 @@ export default function App() {
                             position: "relative",
                           }}
                         >
-                          {note && <Box
+                          {console.log(noteArray?.find((item) => item.id === id)?.note, "noteArray[index]?.note")}
+                          {noteArray?.find((item) => item.id === id)?.note && <Box
                             style={{
                               position: "absolute",
                               right: ".5rem",
@@ -613,8 +648,8 @@ export default function App() {
                               border: "none",
                             }}
                             rows="3"
-                            value={note}
-                            onChange={(event) => setNote(event.target.value)}
+                            value={noteArray[index]?.note}
+                            onChange={(event) => setNoteHanlder(event, id)}
                           />
                           {/* <Button
                             className={classes.addButton}
@@ -639,6 +674,10 @@ export default function App() {
                       }}
                     >
                       <Box>
+                        <Typography style={{
+                          fontSize: "10px",
+                          marginLeft: ".7rem"
+                        }}>photo {fileArray.length > 0 ? (fileArray?.find((item) => item.id === id) ? fileArray?.find((item) => item.id === id)?.files.length + 1 : 1) : 1}</Typography>
                         <input
                           type="file"
                           style={{ display: "none" }}
@@ -647,7 +686,7 @@ export default function App() {
                         />
                         <label htmlFor={`fileInput-${_index}`}>
                           <Button
-                            onClick={() => console.log(id, "id")}
+
                             className={classes.addButton}
                             component="span"
                           >
