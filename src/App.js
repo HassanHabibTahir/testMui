@@ -190,12 +190,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     height: theme.typography.pxToRem(13),
     fontSize: theme.typography.pxToRem(10),
-    color: "#4CB6D9",
-    background: "#EDEDED",
-    padding: "12px 5px",
+    color: "#4CB6D9 !important",
+    background: "#EDEDED !important",
+    padding: "12px 5px !important",
     // marginLeft: "5px",
     // marginBottom: "5px",
-    margin: "5px",
+    margin: "5px !important",
   },
   Muiselect: {
     outline: "none",
@@ -267,13 +267,10 @@ export default function App() {
   const [selectStatus, setSelectStatus] = React.useState("");
   const [index, setIndex] = React.useState(-1);
   const [fileArray, setFileArray] = React.useState([]);
-  const [showDialog, setShowDialog] = React.useState(false);
+  const [showDialog, setShowDialog] = React.useState({});
   const [noteArray, setNoteArray] = React.useState([]);
   const [note, setNote] = React.useState("");
 
-  const handleCloseDialog = () => {
-    setShowDialog(false);
-  };
   const handleAddFile = (event, index) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
@@ -295,9 +292,6 @@ export default function App() {
     }
   };
 
-  // const newArray = [...fileArray];
-  // newArray.splice(index, 1);
-  // setFileArray(newArray);
   const handleRemoveFile = (id, index) => {
     setFileArray((prevArray) => {
       const updatedArray = prevArray.map((item) => {
@@ -318,9 +312,10 @@ export default function App() {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
-  const handleAddNote = (e, id) => {
-    setShowDialog(true);
+  const showAddNote = (id) => {
+    setShowDialog((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+  const handleAddNote = (id) => {
     if (note) {
       const updatedNoteArray = [...noteArray];
       const existingNoteIndex = updatedNoteArray.findIndex(
@@ -337,6 +332,8 @@ export default function App() {
       }
       setNoteArray(updatedNoteArray);
     }
+    setNote("");
+    setShowDialog((prev) => ({ ...prev, [id]: false }));
   };
 
   const togleHandler = (_index, toggle) => {
@@ -381,14 +378,14 @@ export default function App() {
                 style={{
                   transition: "1s",
                 }}
-              // expandIcon={<ExpandLessIcon className={classes.expandIcon}
-              //   style={{
-              //     transform: toggle ? 'rotate(180deg)' : 'rotate(0deg)'
-              //   }}
-              // />}
+                // expandIcon={<ExpandLessIcon className={classes.expandIcon}
+                //   style={{
+                //     transform: toggle ? 'rotate(180deg)' : 'rotate(0deg)'
+                //   }}
+                // />}
 
-              // aria-controls="panel1bh-content"
-              // id="panel1bh-header"
+                // aria-controls="panel1bh-content"
+                // id="panel1bh-header"
               >
                 <IconButton
                   className={classes.customExpandIcon}
@@ -531,21 +528,6 @@ export default function App() {
                         Inactive
                       </MenuItem>
                     </Select>
-
-                    {/* <Box
-                        style={{
-                          width: "100%",
-                          height: 40,
-                          borderRadius: "5px",
-                          color: "#4CB6D9",
-                          backgroundColor: "#F7F7F7",
-                          padding: "12px",
-                        }}
-                      >
-                        <Typography className={classes.selectComponent}>
-                          Select
-                        </Typography>
-                      </Box> */}
                     <Box
                       style={{
                         margin: "8px 6px",
@@ -564,11 +546,11 @@ export default function App() {
                           display: "flex",
                           alignItems: "center",
                           gap: "15px",
-                          flexDirection:"column"
                         }}
                       >
                         <AddCircleIcon
-                          onClick={(e) => handleAddNote(e, id)}
+                          onClick={() => showAddNote(id)}
+                          // onClick={() => setShowDialog(!showDialog)}
                           style={{
                             color: "#4CB6D9",
                             cursor: "pointer",
@@ -577,20 +559,8 @@ export default function App() {
                         <Typography className={classes.AddNote}>
                           Add Note
                         </Typography>
-                        <Box>
-                          <textarea
-                            style={{
-                              // border: "none",
-                              // outline: "none",
-                            }}
-                            rows="4"
-                            cols="50"
-                            value={note}
-                            onChange={(event) => setNote(event.target.value)}
-                            placeholder="Enter your note..."
-                          />
-                        </Box>
-                        <CustomizedDialogs
+
+                        {/* <CustomizedDialogs
                           open={showDialog}
                           onClose={handleCloseDialog}
                           onAddNote={handleAddNote}
@@ -598,8 +568,38 @@ export default function App() {
                           noteArray={noteArray}
                           note={note}
                           setNote={setNote}
-                        />
+                        /> */}
                       </Box>
+                      {showDialog[id] && (
+                        <Box
+                          style={{
+                            marginTop: "5px",
+                            textAlign: "center",
+                          }}
+                        >
+                          <textarea
+                            style={{
+                              border: "1px solid #4CB6D9",
+                              outline: "none",
+                              width: "100%",
+                              padding: "5px",
+                            }}
+                            rows="3"
+                            value={note}
+                            onChange={(event) => setNote(event.target.value)}
+                            placeholder="Enter your note..."
+                          />
+                          <Button
+                            className={classes.addButton}
+                            onClick={() => handleAddNote(id)}
+                            style={{
+                              margin: "0 auto",
+                            }}
+                          >
+                            Add Note
+                          </Button>
+                        </Box>
+                      )}
                     </Box>
                     <Typography className={classes.photos}>PHOTOS</Typography>
                     <Box
@@ -611,13 +611,6 @@ export default function App() {
                         padding: "3px 10px",
                       }}
                     >
-                      {/* <Button className={classes.addButton}>Add</Button>
-                      <Typography
-                        style={{ paddingLeft: "8px" }}
-                        className={classes.AddNote}
-                      >
-                        Photo 1
-                      </Typography> */}
                       <Box>
                         <input
                           type="file"
@@ -639,36 +632,36 @@ export default function App() {
                           <>
                             {item.id === id
                               ? item.files.map((file, index) => (
-                                <>
-                                  <li
-                                    key={index}
-                                    style={{
-                                      background: "#fff",
-                                      margin: "8px 0px",
-                                      listStyleType: "none",
-                                      padding: "10px",
-                                      display: "flex",
-                                      alignItems: "center",
-                                    }}
-                                  >
-                                    <Typography
-                                      style={{ paddingLeft: "8px" }}
-                                      className={classes.AddNote}
-                                    >
-                                      {file?.name}
-                                    </Typography>
-                                    <CloseIcon
+                                  <>
+                                    <li
+                                      key={index}
                                       style={{
-                                        marginLeft: "auto",
-                                        cursor: "pointer",
+                                        background: "#fff",
+                                        margin: "8px 0px",
+                                        listStyleType: "none",
+                                        padding: "10px",
+                                        display: "flex",
+                                        alignItems: "center",
                                       }}
-                                      onClick={() =>
-                                        handleRemoveFile(item.id, index)
-                                      }
-                                    />
-                                  </li>
-                                </>
-                              ))
+                                    >
+                                      <Typography
+                                        style={{ paddingLeft: "8px" }}
+                                        className={classes.AddNote}
+                                      >
+                                        {file?.name}
+                                      </Typography>
+                                      <CloseIcon
+                                        style={{
+                                          marginLeft: "auto",
+                                          cursor: "pointer",
+                                        }}
+                                        onClick={() =>
+                                          handleRemoveFile(item.id, index)
+                                        }
+                                      />
+                                    </li>
+                                  </>
+                                ))
                               : ""}
                           </>
                         ))}
