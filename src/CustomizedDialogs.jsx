@@ -98,7 +98,7 @@ export default function CustomizedDialogs(props) {
         />
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={handleAddNote} color="primary">
+        <Button autoFocus onClick={handleAddNote} color="#4CB6D9">
           Add
         </Button>
       </DialogActions>

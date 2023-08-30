@@ -564,6 +564,7 @@ export default function App() {
                           display: "flex",
                           alignItems: "center",
                           gap: "15px",
+                          flexDirection:"column"
                         }}
                       >
                         <AddCircleIcon
@@ -576,7 +577,19 @@ export default function App() {
                         <Typography className={classes.AddNote}>
                           Add Note
                         </Typography>
-
+                        <Box>
+                          <textarea
+                            style={{
+                              // border: "none",
+                              // outline: "none",
+                            }}
+                            rows="4"
+                            cols="50"
+                            value={note}
+                            onChange={(event) => setNote(event.target.value)}
+                            placeholder="Enter your note..."
+                          />
+                        </Box>
                         <CustomizedDialogs
                           open={showDialog}
                           onClose={handleCloseDialog}
