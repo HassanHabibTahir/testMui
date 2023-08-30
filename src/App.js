@@ -567,7 +567,7 @@ export default function App() {
                       >
                         ADDITIONAL COMMENTS
                       </Typography>
-                      <Box
+                      {!showDialog[id] && <Box
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -585,17 +585,7 @@ export default function App() {
                         <Typography className={classes.AddNote}>
                           Add Note
                         </Typography>
-
-                        {/* <CustomizedDialogs
-                          open={showDialog}
-                          onClose={handleCloseDialog}
-                          onAddNote={handleAddNote}
-                          itemIndex={index}
-                          noteArray={noteArray}
-                          note={note}
-                          setNote={setNote}
-                        /> */}
-                      </Box>
+                      </Box>}
                       {showDialog[id] && (
                         <Box
                           style={{
