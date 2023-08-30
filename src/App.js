@@ -685,7 +685,7 @@ export default function App() {
                                       <Typography style={{
                                         fontSize: "10px",
                                         marginLeft: ".7rem"
-                                      }}>photos {+index} </Typography>
+                                      }}>photos {+index + 1} </Typography>
                                       <Typography
                                         style={{ paddingLeft: "8px" }}
                                         className={classes.AddNote}
