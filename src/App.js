@@ -264,7 +264,7 @@ export default function App() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [toggle] = React.useState(true);
-  const [selectStatus, setSelectStatus] = React.useState("");
+  const [selectStatus, setSelectStatus] = React.useState({});
   const [index, setIndex] = React.useState(-1);
   const [fileArray, setFileArray] = React.useState([]);
   const [showDialog, setShowDialog] = React.useState({});
@@ -306,9 +306,18 @@ export default function App() {
       return updatedArray;
     });
   };
-  const handleStatusChange = (event) => {
-    setSelectStatus(event.target.value);
+  // const handleStatusChange = (event, id) => {
+  //   console.log(id, "id.........................");
+
+  //   setSelectStatus(event.target.value);
+  // };
+  const handleStatusChange = (event, id) => {
+    setSelectStatus((prevStatus) => ({
+      ...prevStatus,
+      [id]: event.target.value,
+    }));
   };
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -513,8 +522,8 @@ export default function App() {
                     <Select
                       className={classes.selectBox}
                       inputProps={{ "aria-label": "Without label" }}
-                      value={selectStatus}
-                      onChange={handleStatusChange}
+                      value={selectStatus[id] || ""}
+                      onChange={(e) => handleStatusChange(e, id)}
                       displayEmpty
                       renderValue={(value) => (value === "" ? "Select" : value)}
                     >
